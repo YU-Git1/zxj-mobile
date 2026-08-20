@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>造形家 · 全部套餐</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-nav" id="top">
+      <div class="nav-inner">
+        <a class="brand" href="#top" aria-label="造形家首页"><span class="brand-mark"><i></i><i></i><i></i></span><span>造形家</span></a>
+        <nav class="nav-links" aria-label="主导航">
+          <a href="#top">首页</a><a href="#plans">核心功能</a><a href="#plans">支持平台</a><a class="active" href="#plans">定价</a><a href="#faq">教程文档</a><a href="#footer">联系我们</a>
+        </nav>
+        <a class="nav-cta" href="#cta">立即生成</a>
+      </div>
+    </header>
+
+    <main>
+      <section class="pricing-section" id="plans">
+        <div class="glow glow-a"></div><div class="glow glow-b"></div><div class="glow glow-c"></div>
+        <div class="section-inner pricing-inner">
+          <div class="section-heading">
+            <h1>全部套餐</h1>
+            <p>丰富的套餐功能，支持按月/年灵活购买</p>
+          </div>
+          <div class="billing-toggle" role="group" aria-label="计费周期">
+            <button class="billing-option selected" data-period="monthly">月</button>
+            <button class="billing-option" data-period="yearly">年 <span>优惠 15%</span></button>
+          </div>
+          <div class="plan-grid">
+            <article class="plan-card">
+              <div class="plan-content">
+                <h2>免费版</h2>
+                <div class="price-line"><strong>免费</strong></div>
+                <ul><li>注册赠送 300 积分</li><li>AI 识别生成3D模型</li><li>单次框选区域面积 ≤ 1km²</li></ul>
+              </div>
+            </article>
+            <article class="plan-card featured">
+              <div class="plan-content">
+                <div class="plan-title-row"><h2>专业版</h2><span class="tag">最受欢迎</span></div>
+                <div class="price-line"><small>￥</small><strong data-monthly="69" data-yearly="59">69</strong><em>/月</em></div>
+                <ul><li>每日免费 200 积分</li><li>AI 识别生成3D模型</li><li>单次框选区域面积 ≤ 1km²</li><li>不限导出 3D 模型</li></ul>
+              </div>
+            </article>
+            <article class="plan-card">
+              <div class="plan-content">
+                <h2>企业版</h2>
+                <div class="price-line"><small>￥</small><strong data-monthly="389" data-yearly="330">389</strong><em>/月</em></div>
+                <ul><li>每日免费 500 积分</li><li>AI 识别生成3D模型</li><li>单次框选区域面积 ≤ 10km²</li><li>不限导出 3D 模型</li><li>支持上传自定义底图</li></ul>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="faq-section" id="faq">
+        <div class="section-inner faq-inner">
+          <h2 class="section-title">常见问题</h2>
+          <div class="faq-list">
+            <details class="faq-item" open>
+              <summary><span><b>Q1</b>购买造形家套餐后，可以获得哪些权益？</span><span class="chevron">⌃</span></summary>
+              <div class="faq-answer">购买造形家套餐后，您将获得以下核心权益：<br>·每日刷新积分：专业版和企业版用户每日可获得免费刷新积分，用于AI 识别生成3D模型。每日刷新积分次日自动重置，不可累积。<br>·一次性赠送积分：套餐存续期间，每个计费周期您都会获得对应套餐的一次性赠送积分，更高的套餐级别包含更多一次性赠送积分，整体价值更高。<br>·更大生成范围：不同套餐支持不同面积的单次地图框选范围，满足企业级项目的使用需求。<br>·模型导出能力：专业版和企业版支持不限次数导出生成后的3D模型。<br>·企业级功能支持：企业版支持上传自定义底图，适用于城市规划、数字孪生等专业应用场景。</div>
+            </details>
+            <details class="faq-item"><summary><span><b>Q2</b>造形家的积分有什么用途？</span><span class="chevron">⌄</span></summary><div class="faq-answer">积分是造形家用于AI生成3D模型的虚拟额度，可用于AI识别生成3D建筑模型及后续新增的AI生成相关功能。</div></details>
+            <details class="faq-item"><summary><span><b>Q3</b>如何获得积分？</span><span class="chevron">⌄</span></summary><div class="faq-answer">您可以通过购买套餐获得赠送积分和每日免费刷新积分，也可以单独购买积分继续使用。</div></details>
+          </div>
+        </div>
+      </section>
+
+      <section class="cta-section" id="cta">
+        <div class="cta-overlay"></div>
+        <div class="cta-inner">
+          <h2>准备好开始生成建筑模型了吗？</h2><p>用造形家快速将二维图像转化为精美的3D建筑模型</p>
+          <a class="primary-button" href="#top">免费生成模型 <span>→</span></a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer" id="footer">
+      <div class="footer-inner">
+        <a class="brand footer-brand" href="#top"><span class="brand-mark"><i></i><i></i><i></i></span><span>造形家</span></a>
+        <div class="footer-main">
+          <div class="company-block"><img src="assets/asset-4.png" alt="造形家二维码" /><div><p>公司: 杭州多算科技有限公司</p><p>电话: 400-001-5969</p><p>地址: 杭州市文一西路海创科技中心 311121</p></div></div>
+          <div class="friend-links"><b>友情链接:</b><a>山海鲸可视化</a><a>GISBox</a><a>斑斑AI低代码</a><a>轻装3D</a><a>瓦石物联</a><a>气象官</a></div>
+        </div>
+      </div>
+      <div class="copyright">Copyright © 2020-2026 多算科技, All Rights Reserved. <span>浙公网安备33011002019801号</span> <span>浙ICP备20006837号-21</span></div>
+    </footer>
+    <script src="script.js"></script>
+  </body>
+</html>
