@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>教程文档 | 造形家</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root { --bg:#0e1414; --panel:rgba(0,177,204,.01); --line:rgba(0,177,204,.1); --white:#fff; --muted:rgba(255,255,255,.4); --subtle:rgba(255,255,255,.8); --cyan:#00b1cc; }
+    * { box-sizing:border-box; }
+    html { background:var(--bg); }
+    body { margin:0; min-width:320px; color:var(--white); background:var(--bg); font-family:'Noto Sans SC','Microsoft YaHei',sans-serif; -webkit-font-smoothing:antialiased; }
+    button { font:inherit; color:inherit; border:0; background:transparent; }
+    .section { width:100%; min-height:100vh; background:linear-gradient(90deg,rgba(0,177,204,.01),rgba(0,177,204,.01)),var(--bg); }
+    .section-inner { width:100%; max-width:1440px; margin:0 auto; padding:96px 80px; display:flex; flex-direction:column; align-items:center; gap:72px; }
+    .heading { width:100%; text-align:center; }
+    .heading h1 { margin:0; font-size:40px; line-height:56px; font-weight:700; letter-spacing:0; }
+    .heading p { margin:8px 0 0; color:var(--muted); font-size:20px; line-height:28px; }
+    .content { width:100%; display:flex; flex-direction:column; gap:24px; }
+    .block { width:100%; padding:20px; border:1px solid var(--line); border-radius:8px; overflow:hidden; display:flex; flex-direction:column; gap:20px; }
+    .block-head { width:100%; display:flex; align-items:center; gap:12px; }
+    .block-title { min-width:0; flex:1; display:flex; align-items:center; gap:8px; }
+    .block-title img { width:32px; height:32px; object-fit:contain; flex:none; }
+    .title-icon { width:24px; height:24px; flex:none; position:relative; display:inline-block; color:var(--cyan); }
+    .title-icon.video::before { content:''; position:absolute; left:3px; top:5px; width:16px; height:13px; border:1.5px solid currentColor; border-radius:1px; }
+    .title-icon.video::after { content:'›'; position:absolute; left:10px; top:0; font-size:16px; line-height:22px; transform:rotate(180deg); }
+    .title-icon.file::before { content:''; position:absolute; left:4px; top:2px; width:15px; height:19px; border:1.5px solid currentColor; border-radius:1px; }
+    .title-icon.file::after { content:'≡'; position:absolute; left:8px; top:2px; font-size:12px; line-height:18px; }
+    .block-title h2 { margin:0; font-size:24px; line-height:32px; font-weight:500; }
+    .more { display:flex; align-items:center; gap:4px; padding:5px 8px; color:var(--muted); font-size:14px; line-height:22px; text-decoration:none; white-space:nowrap; transition:color .2s; }
+    .more:hover { color:var(--cyan); }
+    .more img { width:16px; height:16px; }
+    .video-grid { width:100%; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; }
+    .video-main { grid-column:span 2; display:flex; flex-direction:column; gap:16px; }
+    .video-stage { width:100%; aspect-ratio:567/328; position:relative; overflow:hidden; border-radius:4px; background:rgba(255,255,255,.05); display:grid; place-items:center; }
+    .play { width:48px; height:48px; border:0; border-radius:50%; background:rgba(0,0,0,.55); display:grid; place-items:center; cursor:pointer; transition:transform .2s,background .2s; }
+    .play:hover { transform:scale(1.08); background:rgba(0,177,204,.7); }
+    .play img { display:none; }
+    .play::after { content:''; width:0; height:0; margin-left:4px; border-top:7px solid transparent; border-bottom:7px solid transparent; border-left:10px solid #fff; }
+    .video-copy { display:flex; flex-direction:column; gap:8px; }
+    .video-copy h3 { margin:0; font-size:20px; line-height:28px; font-weight:400; }
+    .video-copy p { margin:0; color:var(--muted); font-size:14px; line-height:24px; overflow:hidden; text-overflow:ellipsis; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; }
+    .side-stack { grid-column:3; display:flex; flex-direction:column; gap:20px; }
+    .list-card { width:100%; padding:0 12px 12px; border-radius:4px; background:var(--panel); overflow:hidden; }
+    .list-head { min-height:56px; padding:0; border-bottom:1px solid rgba(255,255,255,.1); display:flex; align-items:center; justify-content:space-between; }
+    .list-head h3 { margin:0; padding:12px 0; font-size:20px; line-height:28px; font-weight:400; }
+    .list-head .more { padding:6px 0 6px 8px; font-size:12px; line-height:20px; }
+    .rows { display:flex; flex-direction:column; gap:8px; padding-top:12px; }
+    .row { width:100%; min-height:32px; display:flex; align-items:center; gap:8px; padding:5px 8px; border-radius:4px; color:var(--subtle); font-size:14px; line-height:22px; cursor:pointer; transition:background .2s,color .2s; }
+    .row:hover { background:rgba(0,177,204,.05); color:var(--cyan); }
+    .row.active { background:rgba(0,177,204,.05); color:var(--cyan); }
+    .dot { width:12px; height:12px; flex:none; position:relative; }
+    .dot::before { content:''; position:absolute; width:5px; height:5px; top:4px; left:4px; border-radius:50%; background:rgba(255,255,255,.35); }
+    .row.active .dot::before { background:var(--cyan); }
+    .row span:nth-child(2) { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+    .docs-grid { width:100%; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:20px; }
+    .docs-card { min-width:0; padding:0 12px 12px; border-radius:4px; background:var(--panel); overflow:hidden; }
+    .docs-card.wide { grid-column:span 2; }
+    .docs-card.wide .list-head { width:100%; }
+    .tabs { display:flex; align-items:center; gap:28px; }
+    .tab { position:relative; padding:12px 0; color:var(--muted); font-size:20px; line-height:28px; cursor:pointer; }
+    .tab.active { color:var(--white); }
+    .tab.active::after { content:''; position:absolute; left:0; right:0; bottom:-1px; height:2px; background:var(--cyan); }
+    .docs-card.wide .rows { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); column-gap:16px; row-gap:8px; }
+    .date { margin-left:auto; flex:none; color:var(--muted); font-size:12px; line-height:20px; }
+    @media (max-width:900px) {
+      .section-inner { padding:64px 20px; gap:48px; }
+      .heading h1 { font-size:32px; line-height:44px; }
+      .heading p { font-size:16px; line-height:24px; }
+      .block { padding:16px; }
+      .video-grid,.docs-grid { grid-template-columns:1fr; }
+      .video-main,.side-stack,.docs-card.wide { grid-column:auto; }
+      .docs-card.wide .rows { grid-template-columns:1fr; }
+      .block-title h2 { font-size:20px; }
+    }
+    @media (max-width:520px) {
+      .section-inner { padding:48px 12px; }
+      .block-head { align-items:flex-start; }
+      .more { font-size:12px; }
+      .list-head h3,.tab { font-size:18px; }
+      .row { font-size:13px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="section" data-node-id="17:2">
+    <div class="section-inner" data-node-id="17:3">
+      <header class="heading" data-node-id="17:4">
+        <h1 data-node-id="17:5">教程文档</h1>
+        <p data-node-id="17:6">零基础也能轻松生成三维模型</p>
+      </header>
+      <div class="content" data-node-id="17:7">
+        <section class="block" data-node-id="17:8">
+          <div class="block-head" data-node-id="17:9">
+            <div class="block-title"><span class="title-icon video" aria-hidden="true"></span><h2>视频教程</h2></div>
+            <a class="more" href="#video-center">前往视频中心 <img src="https://www.figma.com/api/mcp/asset/50029f0d-a442-452c-87b7-fb999674a9e0.svg" alt=""></a>
+          </div>
+          <div class="video-grid">
+            <article class="video-main">
+              <div class="video-stage" id="video-center"><button class="play" type="button" aria-label="播放视频"></button></div>
+              <div class="video-copy"><h3>视频标题</h3><p>视频简介内容视频简介内容视频简介内容视频简介内容视频简介内容视频简介内容视频简介内容视频简介内容视频简介内容视频简介内容视频简介内容视频简介内容视频简介内容介内容</p></div>
+            </article>
+            <aside class="side-stack">
+              <section class="list-card"><div class="list-head"><h3>热门推荐</h3><a class="more" href="#">查看更多 <img src="https://www.figma.com/api/mcp/asset/0c4face9-1bbf-4b4d-913a-8ac476cae0d8.svg" alt=""></a></div><div class="rows"></div></section>
+              <section class="list-card"><div class="list-head"><h3>最新上线</h3><a class="more" href="#">查看更多 <img src="https://www.figma.com/api/mcp/asset/0c4face9-1bbf-4b4d-913a-8ac476cae0d8.svg" alt=""></a></div><div class="rows" data-list="latest"></div></section>
+            </aside>
+          </div>
+        </section>
+        <section class="block" data-node-id="17:100">
+          <div class="block-head"><div class="block-title"><span class="title-icon file" aria-hidden="true"></span><h2>最新文档</h2></div></div>
+          <div class="docs-grid">
+            <section class="docs-card wide"><div class="list-head"><div class="tabs"><button class="tab active" type="button">斑斑AI动态</button></div><a class="more" href="#">查看更多 <img src="https://www.figma.com/api/mcp/asset/0c4face9-1bbf-4b4d-913a-8ac476cae0d8.svg" alt=""></a></div><div class="rows" data-list="news"></div></section>
+            <section class="docs-card"><div class="list-head"><div class="tabs"><button class="tab active" type="button">推荐文档</button><button class="tab" type="button">最新文档</button></div><a class="more" href="#">查看更多 <img src="https://www.figma.com/api/mcp/asset/0c4face9-1bbf-4b4d-913a-8ac476cae0d8.svg" alt=""></a></div><div class="rows" data-list="docs"></div></section>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+  <script>
+    const rowIcon = 'https://www.figma.com/api/mcp/asset/01ba0041-5cde-415b-9f8e-00457cceb391.svg';
+    const activeIcon = 'https://www.figma.com/api/mcp/asset/8abefcea-58e9-44bb-8153-16cd63596cf8.svg';
+    function renderRows(selector, count, withDate = false, activeIndex = 1) {
+      const target = document.querySelector(selector);
+      if (!target) return;
+      target.innerHTML = Array.from({ length: count }, (_, i) => `<div class="row${i === activeIndex ? ' active' : ''}" tabindex="0"><span class="dot"></span><span>${withDate ? '文档标题' : '视频标题'}</span>${withDate ? '<span class="date">2026/05/20</span>' : ''}</div>`).join('');
+      target.querySelectorAll('.row').forEach(row => row.addEventListener('click', () => { target.querySelectorAll('.row').forEach(item => item.classList.remove('active')); row.classList.add('active'); }));
+    }
+    renderRows('.side-stack .list-card:first-child .rows', 5, false, 1);
+    renderRows('[data-list="latest"]', 6, false, -1);
+    renderRows('[data-list="news"]', 12, true, 2);
+    renderRows('[data-list="docs"]', 6, true, -1);
+    document.querySelectorAll('.tabs').forEach(tabs => tabs.querySelectorAll('.tab').forEach(tab => tab.addEventListener('click', () => { tabs.querySelectorAll('.tab').forEach(item => item.classList.remove('active')); tab.classList.add('active'); })));
+    document.querySelector('.play').addEventListener('click', event => { event.currentTarget.classList.toggle('is-playing'); });
+  </script>
+</body>
+</html>
