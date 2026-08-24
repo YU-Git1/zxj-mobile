@@ -49,11 +49,10 @@
     .list-head .more { padding:6px 0 6px 8px; font-size:12px; line-height:20px; }
     .rows { display:flex; flex-direction:column; gap:8px; padding-top:12px; }
     .row { width:100%; min-height:32px; display:flex; align-items:center; gap:8px; padding:5px 8px; border-radius:4px; color:var(--subtle); font-size:14px; line-height:22px; cursor:pointer; transition:background .2s,color .2s; }
-    .row:hover { background:rgba(0,177,204,.05); color:var(--cyan); }
-    .row.active { background:rgba(0,177,204,.05); color:var(--cyan); }
+    .row:hover, .row:focus-visible { background:rgba(0,177,204,.05); color:var(--cyan); outline:none; }
     .dot { width:12px; height:12px; flex:none; position:relative; }
     .dot::before { content:''; position:absolute; width:5px; height:5px; top:4px; left:4px; border-radius:50%; background:rgba(255,255,255,.35); }
-    .row.active .dot::before { background:var(--cyan); }
+    .row:hover .dot::before, .row:focus-visible .dot::before { background:var(--cyan); }
     .row span:nth-child(2) { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
     .docs-grid { width:100%; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:20px; }
     .docs-card { min-width:0; padding:0 12px 12px; border-radius:4px; background:var(--panel); overflow:hidden; }
@@ -121,16 +120,15 @@
   <script>
     const rowIcon = 'https://www.figma.com/api/mcp/asset/01ba0041-5cde-415b-9f8e-00457cceb391.svg';
     const activeIcon = 'https://www.figma.com/api/mcp/asset/8abefcea-58e9-44bb-8153-16cd63596cf8.svg';
-    function renderRows(selector, count, withDate = false, activeIndex = 1) {
+    function renderRows(selector, count, withDate = false) {
       const target = document.querySelector(selector);
       if (!target) return;
-      target.innerHTML = Array.from({ length: count }, (_, i) => `<div class="row${i === activeIndex ? ' active' : ''}" tabindex="0"><span class="dot"></span><span>${withDate ? '文档标题' : '视频标题'}</span>${withDate ? '<span class="date">2026/05/20</span>' : ''}</div>`).join('');
-      target.querySelectorAll('.row').forEach(row => row.addEventListener('click', () => { target.querySelectorAll('.row').forEach(item => item.classList.remove('active')); row.classList.add('active'); }));
+      target.innerHTML = Array.from({ length: count }, () => `<div class="row" tabindex="0"><span class="dot"></span><span>${withDate ? '文档标题' : '视频标题'}</span>${withDate ? '<span class="date">2026/05/20</span>' : ''}</div>`).join('');
     }
-    renderRows('.side-stack .list-card:first-child .rows', 5, false, 1);
-    renderRows('[data-list="latest"]', 6, false, -1);
-    renderRows('[data-list="news"]', 12, true, 2);
-    renderRows('[data-list="docs"]', 6, true, -1);
+    renderRows('.side-stack .list-card:first-child .rows', 5);
+    renderRows('[data-list="latest"]', 6);
+    renderRows('[data-list="news"]', 12, true);
+    renderRows('[data-list="docs"]', 6, true);
     document.querySelectorAll('.tabs').forEach(tabs => tabs.querySelectorAll('.tab').forEach(tab => tab.addEventListener('click', () => { tabs.querySelectorAll('.tab').forEach(item => item.classList.remove('active')); tab.classList.add('active'); })));
     document.querySelector('.play').addEventListener('click', event => { event.currentTarget.classList.toggle('is-playing'); });
   </script>
