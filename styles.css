@@ -6,12 +6,45 @@
 :root{
   --bg: #0E1414;
   --bg-footer: #121A1A;
-  --nav-bg: #000000;
+  --nav-bg: rgba(0,0,0,.01);  /* 与 Figma 顶部导航栏容器一致: solid #000 @op0.01 + blur16 */
   --accent: #00B1CC;
   --accent-bright: #00FFFF;
   --accent-deep: #00ACE6;
   --text: #FFFFFF;
-  --text-soft: rgba(255,255,255,.86);
+
+  /* ===== 严格取自 Figma 节点的 fill / stroke / opacity ===== */
+  /* Frame 1142819477 / Frame 1142819731 : accent fill @op0.01 + accent stroke @op0.10 w1 + blur16 */
+  --card-fill: rgba(0,177,204,.01);
+  --card-stroke: rgba(0,177,204,.10);
+
+  /* Frame 1142819724 / 25 / 26 (info-row 三张横卡) : accent fill @op0.01 + accent stroke @op0.05 w1 */
+  --info-fill: rgba(0,177,204,.01);
+  --info-stroke: rgba(0,177,204,.05);
+
+  /* Frame 1142819452 (每个 tool 卡) : accent fill @op0.01 + accent stroke @op0.10 w1 */
+  --tool-fill: rgba(0,177,204,.01);
+  --tool-stroke: rgba(0,177,204,.10);
+
+  /* cat-card (Frame 1142819392 / 94 / 93 / 91 / 90) : #0E1414 fill @op0.10 + accent stroke @op0.10 w1 + blur24 */
+  --cat-fill: rgba(14,20,20,.10);
+  --cat-stroke: rgba(0,177,204,.10);
+
+  /* 层 tab : 激活 Show All @op0.10 ; 其余 Buildings/Terrain/Trees @op0.05 */
+  --tab-active-fill: rgba(255,255,255,.10);
+  --tab-fill: rgba(255,255,255,.05);
+
+  /* Tag 背景: white fill @op0.08 */
+  --tag-bg: rgba(255,255,255,.08);
+
+  /* 辅助文字: 描述文本 / section p / card-desc / info p / step-list li … 全都是 white fill @op0.40 */
+  --text-dim: rgba(255,255,255,.40);
+
+  /* feature 行文字 / 非激活 layer-tab 标签: white fill @op0.60 */
+  --text-soft: rgba(255,255,255,.60);
+
+  /* 非激活 dot: white @op0.20 */
+  --dot-inactive: rgba(255,255,255,.20);
+
   --gold: #E2BA74;
   --green: #27C346;
   --tile: #0E1414;
@@ -47,6 +80,7 @@ img{ display: block; max-width: 100%; }
 }
 
 /* ============ TOP NAV BAR ============ */
+/* Figma [33:313] 顶部导航栏容器: fills solid #000 @op0.01 + effect BACKGROUND_BLUR r=16 */
 .nav{
   position: sticky;
   top: 0;
@@ -54,6 +88,8 @@ img{ display: block; max-width: 100%; }
   width: 375px;
   height: 60px;
   background: var(--nav-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   display: flex;
   align-items: center;
 }
@@ -155,8 +191,8 @@ img{ display: block; max-width: 100%; }
   padding: 2px;
 }
 .tag-text{
-  background: #fff;
-  color: var(--bg);
+  background: var(--tag-bg);           /* Figma: white fill @op0.08 */
+  color: #fff;                         /* 文字仍为白色，按标签文本定义 white fill @op1.00 */
   width: 172px;
   height: 24px;
   border-radius: 2px;
@@ -196,7 +232,7 @@ img{ display: block; max-width: 100%; }
   font-size: 16px;
   font-weight: 400;
   line-height: 24px;
-  color: #fff;
+  color: var(--text-dim);            /* Figma [33:44] 描述文本 white @op0.40 */
 }
 
 /* hero features */
@@ -215,7 +251,7 @@ img{ display: block; max-width: 100%; }
   font-size: 12px;
   font-weight: 400;
   line-height: 20px;
-  color: #fff;
+  color: var(--text-soft);           /* Figma No drone survey required / Preview before export / Layer-by-layer editing white @op0.60 */
 }
 .star{ display: inline-flex; }
 .star img{ width: 12px; height: 11px; }
@@ -245,7 +281,8 @@ img{ display: block; max-width: 100%; }
   font-size: 16px;
   font-weight: 600;
   line-height: 24px;
-  box-shadow: 0 8px 32px rgba(0,177,204,.35);
+  /* Figma [33:59] 行动按钮 effect DROP_SHADOW r32 rgba(0,177,204,0.20) */
+  box-shadow: 0 0 32px rgba(0,177,204,.20);
 }
 .cta-hero{ width: 252px; }
 .cta-arrow{ width: 24px; height: 24px; flex: none; }
@@ -292,10 +329,12 @@ img{ display: block; max-width: 100%; }
   font-size: 14px;
   font-weight: 400;
   line-height: 22px;
-  color: #fff;
+  color: var(--text-dim);            /* Figma 所有 section 下的段落描述 white @op0.40 */
 }
 
 /* ============ CARD STACK (Section 2 & 4) ============ */
+/* Figma [33:71] Frame 1142819477 & [33:130] Frame 1142819477 & [33:153] Frame 1142819731
+   fills: accent @op0.01 | strokes: accent @op0.10 w1 | effect: BACKGROUND_BLUR r16 */
 .card-stack{
   width: 343px;
   display: flex;
@@ -305,12 +344,15 @@ img{ display: block; max-width: 100%; }
 }
 .card{
   width: 343px;
-  background: var(--accent);
+  background: var(--card-fill);
+  border: 1px solid var(--card-stroke);
   border-radius: 4px;
   display: flex;
   flex-direction: column;
   gap: 32px;
   padding: 12px;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
 }
 .card-img{
   width: 319px;
@@ -333,14 +375,21 @@ img{ display: block; max-width: 100%; }
 .card-title{ font-size: 16px; font-weight: 600; line-height: 24px; color: #fff; flex: 1; }
 .arrow-chip{ width: 24px; height: 24px; background: #fff; border-radius: 2px; display: inline-flex; }
 .arrow-chip svg{ width: 24px; height: 24px; }
-.card-desc{ font-size: 12px; font-weight: 400; line-height: 20px; color: #fff; }
+.card-desc{ font-size: 12px; font-weight: 400; line-height: 20px; color: var(--text-dim); }  /* Figma [33:79] Generate a usable… white @op0.40 */
 
 /* dots */
 .dots{ display: flex; align-items: center; gap: 8px; }
-.dot{ width: 12px; height: 6px; border-radius: 4px; background: rgba(255,255,255,.32); }
+.dot{ width: 12px; height: 6px; border-radius: 4px; background: var(--dot-inactive); }  /* Figma Rectangle 1875/76/77 white @op0.20 */
 .dot-active{ width: 32px; background: #fff; }
 
 /* ============ EDITABLE SECTION ============ */
+/* layer tabs
+   Figma
+   [33:92] Frame 1142819481 (Show All)   white fill @op0.10
+   [33:96/100/104] 其余 3 tab             white fill @op0.05
+   [33:95] Show All      text white @op1.00 w600
+   [33:99/103/107] 其余   text white @op0.60 w400
+*/
 .editable-media{
   width: 343px;
   display: flex;
@@ -364,7 +413,7 @@ img{ display: block; max-width: 100%; }
 .layer-tab{
   width: 79.75px;
   height: 60px;
-  background: #fff;
+  background: var(--tab-fill);     /* 默认非激活: white @op0.05 */
   border-radius: 4px;
   padding: 4px;
   display: flex;
@@ -373,22 +422,24 @@ img{ display: block; max-width: 100%; }
   justify-content: center;
   gap: 8px;
 }
+.layer-tab.layer-tab-active{ background: var(--tab-active-fill); }   /* Show All 激活: white @op0.10 */
 .layer-tab-icon{
   width: 24px;
   height: 24px;
   border-radius: 4px;
-  background: #4E4E4E;
+  background: rgba(78,78,78,.5);
   display: inline-flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
 }
 .layer-tab-icon img{ width: 48px; height: 48px; object-fit: cover; transform: scale(.5); transform-origin: center; }
-.layer-tab-label{ font-size: 12px; line-height: 20px; color: #000; }
-.layer-tab-active .layer-tab-label{ font-weight: 600; }
+.layer-tab-label{ font-size: 12px; line-height: 20px; color: var(--text-soft); }    /* 非激活 white @op0.60 */
+.layer-tab-active .layer-tab-label{ color: #fff; font-weight: 600; }                 /* 激活 Show All white @op1.00 w600 */
 .layer-tab:not(.layer-tab-active) .layer-tab-label{ font-weight: 400; }
 
 /* info row (horizontal scroll of 3 cards) */
+/* Figma [33:109/114/119] Frame 1142819724/25/26: accent fill @op0.01 + accent stroke @op0.05 w1 */
 .info-row{
   width: 343px;
   display: flex;
@@ -401,7 +452,8 @@ img{ display: block; max-width: 100%; }
 .info-card{
   flex: 0 0 288px;
   width: 288px;
-  background: var(--accent);
+  background: var(--info-fill);
+  border: 1px solid var(--info-stroke);
   border-radius: 4px;
   padding: 4px 8px 4px 4px;
   display: flex;
@@ -412,7 +464,7 @@ img{ display: block; max-width: 100%; }
 .info-check img{ width: 20px; height: 20px; }
 .info-text{ display: flex; flex-direction: column; gap: 4px; padding-top: 0; }
 .info-text h4{ font-size: 12px; font-weight: 600; line-height: 20px; color: #fff; }
-.info-text p{ font-size: 10px; font-weight: 400; line-height: 18px; color: #fff; }
+.info-text p{ font-size: 10px; font-weight: 400; line-height: 18px; color: var(--text-dim); }  /* Figma 3处横卡副文字 white @op0.40 */
 
 /* ============ HOW IT WORKS (recognize card body) ============ */
 .card-body-recognize{ gap: 12px; }
@@ -435,10 +487,11 @@ img{ display: block; max-width: 100%; }
   font-size: 12px;
   font-weight: 400;
   line-height: 20px;
-  color: #fff;
+  color: var(--text-dim);          /* Figma step-list 三条 white @op0.40 */
 }
 
 /* ============ STEPS SECTION ============ */
+/* Figma [33:153] Frame 1142819731: accent fill @op0.01 + accent stroke @op0.10 w1 + blur16 */
 .steps-wrap{
   width: 343px;
   display: flex;
@@ -448,12 +501,15 @@ img{ display: block; max-width: 100%; }
 }
 .step-card{
   width: 343px;
-  background: var(--accent);
+  background: var(--card-fill);
+  border: 1px solid var(--card-stroke);
   border-radius: 4px;
   padding: 24px 16px;
   display: flex;
   flex-direction: column;
   gap: 24px;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
 }
 .step-card-head{
   display: flex;
@@ -471,10 +527,13 @@ img{ display: block; max-width: 100%; }
 .step-card-arrow svg{ width: 24px; height: 24px; }
 .step-card-body{ display: flex; flex-direction: column; gap: 8px; }
 .step-card-title{ font-size: 16px; font-weight: 500; line-height: 24px; color: #fff; }
-.step-card-desc{ font-size: 12px; font-weight: 400; line-height: 20px; color: #fff; }
+.step-card-desc{ font-size: 12px; font-weight: 400; line-height: 20px; color: var(--text-dim); }   /* Figma [33:161] Choose a location… white @op0.40 */
 .dots-4 .dot:nth-child(4){ display: inline-block; }
 
 /* ============ WORKS WITH YOUR STACK ============ */
+/* cat-card  Frame 1142819392 / 94 / 93 / 91 / 90 : #0E1414 fill @op0.10 + accent stroke @op0.10 w1 + blur24
+   tool      Frame 1142819452                 : accent fill @op0.01 + accent stroke @op0.10 w1
+*/
 .stack-scroll{
   width: 343px;
   display: flex;
@@ -488,13 +547,16 @@ img{ display: block; max-width: 100%; }
 .cat-card{
   flex: 0 0 240px;
   width: 240px;
-  background: var(--tile);
+  background: var(--cat-fill);
+  border: 1px solid var(--cat-stroke);
   border-radius: 8px;
   padding: 12px 8px 8px 8px;
   display: flex;
   flex-direction: column;
   gap: 12px;
   align-items: center;
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
 }
 .cat-card-bim{ flex: 0 0 356px; width: 356px; }
 .cat-head{
@@ -513,14 +575,19 @@ img{ display: block; max-width: 100%; }
   justify-content: center;
   position: relative;
 }
+/* Figma Rectangle 1823 : solid #55D7E0
+   左右 bracket 仅一颗方形装饰；结构中的 Line 89 在 Figma 里是 0 高度，不渲染
+*/
 .bracket::before{
   content: '';
   width: 4px;
   height: 4px;
   background: var(--border-soft);
 }
-.bracket-l::before{ box-shadow: -8px 0 0 0 rgba(255,255,255,1); }
-.bracket-r::before{ box-shadow: 8px 0 0 0 rgba(255,255,255,1); }
+.bracket-l,
+.bracket-r{ /* 两向装饰一致，只是位置左右对称视觉对齐 */ }
+.bracket-l::before,
+.bracket-r::before{ box-shadow: none; }
 
 .cat-tools{
   display: flex;
@@ -531,7 +598,8 @@ img{ display: block; max-width: 100%; }
 .tool{
   width: 108px;
   height: 100px;
-  background: var(--accent);
+  background: var(--tool-fill);
+  border: 1px solid var(--tool-stroke);
   border-radius: 4px;
   padding: 12px 8px;
   display: flex;
@@ -550,7 +618,7 @@ img{ display: block; max-width: 100%; }
   overflow: hidden;
 }
 .tool-icon img{ width: 48px; height: 48px; object-fit: contain; }
-.tool-name{ font-size: 12px; font-weight: 400; line-height: 20px; color: #fff; text-align: center; }
+.tool-name{ font-size: 12px; font-weight: 400; line-height: 20px; color: #fff; text-align: center; }   /* Figma Unreal / Unity / Blender / Revit / Rhino / Sketch Up / ArcGIS Pro / GISBox / Wings Engine 均为 white @op1.00 w400 */
 
 /* ============ CTA SECTION ============ */
 .cta-bg{
