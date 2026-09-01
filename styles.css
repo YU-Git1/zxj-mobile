@@ -681,3 +681,153 @@ img{ display: block; max-width: 100%; }
 }
 .partners-list > span{ font-size: 14px; font-weight: 400; line-height: 22px; color: #fff; }
 .partners-group{ display: inline-flex; gap: 16px; }
+
+/* ============================================================
+   显影交互层 (Reveal + interaction)
+   —— 所有动效均尊重 prefers-reduced-motion
+   ============================================================ */
+
+/* ---- 滚动渐入 ---- */
+.reveal{
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity .8s cubic-bezier(.22,1,.36,1),
+              transform .8s cubic-bezier(.22,1,.36,1);
+  transition-delay: calc(var(--i, 0) * 70ms);
+  will-change: opacity, transform;
+}
+.reveal.is-visible{
+  opacity: 1;
+  transform: none;
+}
+
+/* 图片内层缩放揭示 —— 卡片显影时图片从 1.08 缩回 1，质感来自这里 */
+.reveal .card-img img,
+.reveal .editable-screenshot img,
+.reveal .hero-video img{
+  transform: scale(1.08);
+  transition: transform 1.4s cubic-bezier(.22,1,.36,1);
+}
+.reveal.is-visible .card-img img,
+.reveal.is-visible .editable-screenshot img,
+.reveal.is-visible .hero-video img{
+  transform: scale(1);
+}
+
+/* hero 入场略大位移 + blur-in */
+.hero .reveal{
+  transform: translateY(30px);
+  filter: blur(6px);
+  transition: opacity 1s cubic-bezier(.22,1,.36,1),
+              transform 1s cubic-bezier(.22,1,.36,1),
+              filter 1s cubic-bezier(.22,1,.36,1);
+}
+.hero .reveal.is-visible{
+  opacity: 1;
+  transform: none;
+  filter: blur(0);
+}
+
+/* ---- Hero 光晕呼吸 ---- */
+@keyframes glowPulse{
+  0%, 100%{ opacity: .55; transform: translate(-50%, 40%) scale(1); }
+  50%     { opacity: .9;  transform: translate(-50%, 40%) scale(1.08); }
+}
+.hero-glow{ animation: glowPulse 6s ease-in-out infinite; }
+
+/* CTA 底部光晕同步呼吸（节奏稍慢） */
+@keyframes ctaGlowPulse{
+  0%, 100%{ opacity: .5; transform: translate(-50%, 40%) scale(1); }
+  50%     { opacity: .85; transform: translate(-50%, 40%) scale(1.1); }
+}
+.cta-glow{ animation: ctaGlowPulse 7s ease-in-out infinite; }
+
+/* ---- 导航栏滚动态 ---- */
+.nav{ transition: background .35s ease, backdrop-filter .35s ease; }
+.nav-scrolled{ background: rgba(0,0,0,.55); }
+
+/* ---- 卡片悬浮 ---- */
+.card, .step-card, .cat-card{
+  transition: transform .4s cubic-bezier(.22,1,.36,1),
+              border-color .4s ease,
+              box-shadow .4s ease;
+}
+.card:hover, .step-card:hover, .cat-card:hover{
+  transform: translateY(-4px);
+  border-color: rgba(0,177,204,.25);
+  box-shadow: 0 12px 40px rgba(0,177,204,.08);
+}
+
+/* ---- 工具子卡 hover ---- */
+.tool{ transition: transform .35s cubic-bezier(.22,1,.36,1), border-color .35s ease; }
+.tool:hover{ transform: translateY(-3px); border-color: rgba(0,177,204,.30); }
+.tool-icon img{ transition: transform .4s cubic-bezier(.22,1,.36,1); }
+.tool:hover .tool-icon img{ transform: scale(1.1); }
+
+/* ---- CTA hover：上浮 + 光晕增强 + 箭头右移 ---- */
+.cta{ transition: transform .3s cubic-bezier(.22,1,.36,1), box-shadow .3s ease; }
+.cta:hover{ transform: translateY(-2px); box-shadow: 0 0 44px rgba(0,177,204,.32); }
+.cta-arrow{ transition: transform .3s cubic-bezier(.22,1,.36,1); }
+.cta:hover .cta-arrow{ transform: translateX(4px); }
+
+/* ---- 生成按钮 hover ---- */
+.btn-generate{ transition: filter .25s ease, transform .25s ease; }
+.btn-generate:hover{ filter: brightness(1.12); transform: translateY(-1px); }
+
+/* ---- 层 tab hover ---- */
+.layer-tab{ transition: background .3s ease; }
+.layer-tab:not(.layer-tab-active):hover{ background: rgba(255,255,255,.08); }
+
+/* ---- 星标闪烁 ---- */
+@keyframes twinkle{
+  0%, 100%{ opacity: 1; transform: rotate(0); }
+  50%     { opacity: .7; transform: rotate(10deg); }
+}
+.star img{ animation: twinkle 3s ease-in-out infinite; }
+.feature:nth-child(2) .star img{ animation-delay: .6s; }
+.feature:nth-child(3) .star img{ animation-delay: 1.2s; }
+
+/* ---- 轮播激活点呼吸 ---- */
+@keyframes dotPulse{
+  0%, 100%{ opacity: 1; }
+  50%     { opacity: .6; }
+}
+.dot-active{ animation: dotPulse 2.4s ease-in-out infinite; }
+
+/* ---- 标签四角装饰闪烁 ---- */
+@keyframes cornerBlink{
+  0%, 100%{ opacity: 1; }
+  50%     { opacity: .4; }
+}
+.tag-corner{ animation: cornerBlink 2.6s ease-in-out infinite; }
+.tag-corner-br{ animation-delay: 1.3s; }
+
+/* ---- eyebrow 文字左侧细线 draw-in ---- */
+.eyebrow{
+  position: relative;
+  display: inline-block;
+}
+.eyebrow::before{
+  content: '';
+  position: absolute;
+  left: -16px;
+  top: 50%;
+  width: 0;
+  height: 1px;
+  background: var(--accent);
+  transition: width .9s cubic-bezier(.22,1,.36,1) .25s;
+}
+.section-head-center .eyebrow::before{ display: none; }
+.section-head.is-visible .eyebrow::before,
+.section-head-left.is-visible .eyebrow::before{ width: 10px; }
+
+/* ---- 顶部导航 logo 轻微 hover ---- */
+.logo{ transition: opacity .25s ease; }
+.logo:hover{ opacity: .85; }
+
+/* ---- 减弱动效兜底 ---- */
+@media (prefers-reduced-motion: reduce){
+  .reveal{ opacity: 1 !important; transform: none !important; filter: none !important; transition: none !important; }
+  .hero-glow, .cta-glow, .star img, .dot-active, .tag-corner{ animation: none !important; }
+  .card:hover, .step-card:hover, .cat-card:hover, .tool:hover, .cta:hover{ transform: none; }
+}

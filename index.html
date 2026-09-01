@@ -296,5 +296,129 @@
   </footer>
 
 </div>
+
+<script>
+/* ============================================================
+   Shapezo —— 显影交互脚本
+   全部基于原生 API，无依赖；尊重 prefers-reduced-motion
+   ============================================================ */
+(function(){
+  'use strict';
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- 1. 滚动渐入 ---------- */
+  /* 选择需要显影的块；section-head 内的子元素单独渐入形成阶梯 */
+  var revealSels = [
+    '.section-head > *',
+    '.card-stack',
+    '.card',
+    '.editable-media',
+    '.info-card',
+    '.steps-wrap',
+    '.stack-scroll',
+    '.footer-company',
+    '.footer-partners'
+  ];
+  var revealEls = [];
+  revealSels.forEach(function(sel){
+    document.querySelectorAll(sel).forEach(function(el){ revealEls.push(el); });
+  });
+
+  /* hero 内容也作为渐入目标（首屏即时触发，形成入场序列） */
+  document.querySelectorAll('.hero-content > *').forEach(function(el){ revealEls.push(el); });
+  ['.hero-video', '.cta-hero'].forEach(function(c){
+    var el = document.querySelector(c);
+    if(el) revealEls.push(el);
+  });
+
+  /* 先打上 .reveal，再按"同级中位于其前且也是 reveal"的数量设置阶梯索引 --i */
+  revealEls.forEach(function(el){ el.classList.add('reveal'); });
+  revealEls.forEach(function(el){
+    var i = 0;
+    var sib = el.previousElementSibling;
+    while(sib){ if(sib.classList.contains('reveal')) i++; sib = sib.previousElementSibling; }
+    el.style.setProperty('--i', Math.min(i, 5));
+  });
+
+  /* 需要给 section-head 容器也加 is-visible 触发 eyebrow 细线 */
+  document.querySelectorAll('.section-head').forEach(function(h){
+    h.classList.add('section-head-anim');
+  });
+
+  if(reduce){
+    document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('is-visible'); });
+    document.querySelectorAll('.section-head').forEach(function(el){ el.classList.add('is-visible'); });
+  } else {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){
+          e.target.classList.add('is-visible');
+          /* 同时点亮所在 section-head，触发 eyebrow 细线 */
+          var head = e.target.closest('.section-head');
+          if(head) head.classList.add('is-visible');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
+    revealEls.forEach(function(el){ io.observe(el); });
+
+    /* 单独观察每个 section-head（子元素可能未全部命中时也点亮） */
+    document.querySelectorAll('.section-head').forEach(function(h){
+      var hio = new IntersectionObserver(function(ents){
+        ents.forEach(function(en){
+          if(en.isIntersecting){ h.classList.add('is-visible'); hio.unobserve(h); }
+        });
+      }, { threshold: 0.2 });
+      hio.observe(h);
+    });
+  }
+
+  /* ---------- 2. 导航栏滚动态 ---------- */
+  var nav = document.querySelector('.nav');
+  function onScroll(){
+    if(!nav) return;
+    if(window.scrollY > 12) nav.classList.add('nav-scrolled');
+    else nav.classList.remove('nav-scrolled');
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  /* ---------- 3. 平滑锚点滚动 ---------- */
+  document.querySelectorAll('a[href^="#"]').forEach(function(a){
+    a.addEventListener('click', function(ev){
+      var id = a.getAttribute('href');
+      if(id && id.length > 1){
+        var t = document.querySelector(id);
+        if(t){ ev.preventDefault(); t.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' }); }
+      }
+    });
+  });
+
+  /* ---------- 4. 层 tab 切换 ---------- */
+  var tabs = document.querySelectorAll('.layer-tab');
+  tabs.forEach(function(t){
+    t.addEventListener('click', function(){
+      tabs.forEach(function(x){ x.classList.remove('layer-tab-active'); });
+      t.classList.add('layer-tab-active');
+    });
+  });
+
+  /* ---------- 5. Hero 背景轻微视差 ---------- */
+  var heroBg = document.querySelector('.hero-bg-img');
+  if(heroBg && !reduce){
+    var ticking = false;
+    window.addEventListener('scroll', function(){
+      if(!ticking){
+        window.requestAnimationFrame(function(){
+          var y = window.scrollY;
+          if(y < 900){ heroBg.style.transform = 'translateY(' + (y * 0.15).toFixed(1) + 'px) scale(1.06)'; }
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }, { passive: true });
+  }
+})();
+</script>
 </body>
 </html>
