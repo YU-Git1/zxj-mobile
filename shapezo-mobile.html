@@ -123,9 +123,9 @@
   const stepsTrack = document.createElement('div');
   stepsTrack.className = 'steps-track';
   const stepData = [
-    { no:'01 / RECOGNIZE', title:'Recognize the site automatically', items:['Identify building footprints from satellite imagery','Estimate building heights and infer building types','Analyze surrounding vegetation information'], img:'assets/figma-ai-recognition.png' },
-    { no:'02 / GENERATE', title:'Generate the full site context', items:['Create editable building models','Auto-match terrain for seamless integration','Generate water and vegetation layers'], img:'assets/figma-site-base.png' },
-    { no:'03 / EDIT', title:'Edit individual buildings', items:['Adjust building type, position and rotation','Fine-tune building height and proportions','Keep every edit aligned to the real site'], img:'assets/figma-manual-adjust.png' }
+    { no:'01 / RECOGNIZE', title:'Recognize the site automatically', items:['Identify building footprints from satellite imagery','Estimate building heights and infer building types','Analyze surrounding vegetation information'], img:'assets/workflow-recognize.jpg' },
+    { no:'02 / GENERATE', title:'Generate the full site context', items:['Create editable building models','Auto-match terrain for seamless integration','Generate water and vegetation layers'], img:'assets/workflow-generate.jpg' },
+    { no:'03 / EDIT', title:'Edit individual buildings', items:['Adjust building type, position and rotation','Fine-tune building height and proportions','Keep every edit aligned to the real site'], img:'assets/workflow-edit.jpg' }
   ];
   stepsTrack.innerHTML = stepData.map(({no,title,items,img}) => `<article class="step-card"><div class="step-image" role="img" aria-label="${title}" style="background-image:url('${img}')"></div><div class="step-copy"><span class="step-no">${no}</span><h3>${title}</h3><ul class="step-lines">${items.map((item) => `<li>${item}</li>`).join('')}</ul></div></article>`).join('');
   originalStep.replaceWith(stepsTrack);
