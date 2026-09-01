@@ -24,6 +24,11 @@
     @media(min-width:376px) and (max-width:767px){.page{width:100%;max-width:767px}}
     .tool img{display:block;width:48px;height:48px;object-fit:contain;margin:0 auto 8px}
     .final{background-image:url('assets/background-layer.jpg');background-position:center center;background-repeat:no-repeat;background-size:cover}
+    .hero{background-color:var(--bg);background-image:url('assets/hero-background.jpg');background-position:center center;background-repeat:no-repeat;background-size:auto 100%}
+    .stack-group{backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+    .stack-group h3::before,.stack-group h3::after{content:"";display:block;width:12.243px;height:4.243px;flex:0 0 12.243px;background:center/100% 100% no-repeat}
+    .stack-group h3::before{background-image:url('assets/stack-deco-left.svg')}
+    .stack-group h3::after{background-image:url('assets/stack-deco-right.svg')}
   </style>
 </head>
 <body><main class="page">
@@ -82,10 +87,9 @@
   const stepsTrack = document.createElement('div');
   stepsTrack.className = 'steps-track';
   const stepData = [
-    ['01 / SELECT','Select an area','Choose a location and draw the exact area you want to model.','assets/why-workflow.png'],
-    ['02 / GENERATE','Generate from satellite imagery','Choose a location and draw the exact area you want to model.','assets/asset-1.png'],
-    ['03 / REFINE','Refine the model','Edit objects layer by layer and adjust the model before export.','assets/why-control.png'],
-    ['04 / DELIVER','Export and move on','Continue in BIM, GIS, Blender or a game engine.','assets/city-aerial.jpg']
+    ['01 / RECOGNIZE','Recognize the site automatically','Identify building footprints, estimate building heights and analyze surrounding vegetation from satellite imagery.','assets/why-workflow.png'],
+    ['02 / GENERATE','Generate from satellite imagery','Build terrain, buildings, roads and vegetation from your selected area in seconds.','assets/asset-1.png'],
+    ['03 / REFINE','Refine the model','Edit objects layer by layer and adjust the model before export.','assets/why-control.png']
   ];
   stepsTrack.innerHTML = stepData.map(([no,title,copy,img]) => `<article class="step-card"><div class="step-image" style="background-image:url('${img}')"></div><div class="step-copy"><span class="step-no">${no}</span><h3>${title}</h3><p>${copy}</p></div></article>`).join('');
   originalStep.replaceWith(stepsTrack);
