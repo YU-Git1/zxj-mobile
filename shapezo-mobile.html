@@ -20,10 +20,14 @@
     @media(min-width:320px) and (max-width:767px){.page{width:100%;max-width:767px}}
     @media(min-width:768px){body{background:#071010}.page{max-width:767px;box-shadow:0 0 80px rgba(0,177,204,.08)}}
     .feature-track .feature-card{width:100%;flex:0 0 100%;scroll-snap-stop:always}.editable .feature-card{width:100%;flex:none}.editable .feature-image{background-image:url('assets/editable-all.jpg')}.steps-track{display:flex;gap:16px;margin:48px 0 0;padding:0 0 2px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none}.steps-track::-webkit-scrollbar{display:none}.steps-track .step-card{margin-top:0;width:100%;flex:0 0 100%;scroll-snap-align:start;scroll-snap-stop:always}
-    .page{width:375px;max-width:100%;min-width:320px}.feature-track{margin-left:0!important;margin-right:0!important;padding-left:0!important;padding-right:0!important;overflow-y:hidden;overscroll-behavior-x:contain;touch-action:pan-y}.steps-track{margin-left:0!important;margin-right:0!important;padding-left:0!important;padding-right:0!important;overflow-y:hidden;overscroll-behavior-x:contain;touch-action:pan-y}.dots button{cursor:pointer}
+    .page{width:375px;max-width:100%;min-width:320px}.feature-track{margin-left:0!important;margin-right:0!important;padding-left:0!important;padding-right:0!important;overflow-y:hidden;overscroll-behavior-x:contain;touch-action:pan-y}.steps-track{margin-left:0!important;margin-right:0!important;padding-left:0!important;padding-right:0!important;overflow-y:hidden;overscroll-behavior-x:contain;touch-action:pan-y}.dots button{cursor:pointer}.reveal-item{opacity:0;transform:translateY(var(--reveal-y,10px));transition:opacity var(--reveal-duration,420ms) cubic-bezier(.22,1,.36,1),transform var(--reveal-duration,420ms) cubic-bezier(.22,1,.36,1);transition-delay:var(--reveal-delay,0ms);will-change:opacity,transform}.reveal-item.reveal-media{--reveal-y:8px;--reveal-duration:460ms}.reveal-item.is-visible{opacity:1;transform:translateY(0)}@media(prefers-reduced-motion:reduce){.reveal-item{opacity:1;transform:none;transition:none}}
     @media(min-width:376px) and (max-width:767px){.page{width:100%;max-width:767px}}
     .tool img{display:block;width:48px;height:48px;object-fit:contain;margin:0 auto 8px}
     .final{background-image:url('assets/background-layer.jpg');background-position:center center;background-repeat:no-repeat;background-size:cover}
+    .steps-section .heading h2{font-size:24px;line-height:1.35}.steps-section .step-card{background:rgba(0,177,204,.01);backdrop-filter:blur(8px)}.steps-section .step-image{background-position:center;background-size:cover}.steps-section .step-copy{padding:20px 8px 12px}.steps-section .step-copy h3{font-size:16px}.steps-section .step-copy p{font-size:12px;line-height:1.6}
+    .nav{width:min(100%,375px)}
+    .hero .media{background-image:url('assets/hero-video-poster.png');background-size:cover;background-position:center}
+    .hero .media video{display:block;width:100%;height:100%;object-fit:cover;border:0}
     .hero{background-color:var(--bg);background-image:url('assets/hero-background.jpg');background-position:center center;background-repeat:no-repeat;background-size:auto 100%}
     .stack-group{backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
     .stack-group h3::before,.stack-group h3::after{content:"";display:block;width:12.243px;height:4.243px;flex:0 0 12.243px;background:center/100% 100% no-repeat}
@@ -36,12 +40,15 @@
   <section class="hero" id="top"><span class="eyebrow">AI 3D SITE MODEL GENERATOR</span><h1>Turn Any Map Area into an Editable 3D Site Model</h1><p>Generate buildings, terrain, water and vegetation from satellite and map data. Preview your site in seconds and export models for Unity, Unreal, Blender, BIM and GIS workflows.</p><div class="trust"><span><i class="check">✓</i>No drone survey required</span><span><i class="check">✓</i>Preview before export</span><span><i class="check">✓</i>Layer-by-layer editing</span></div><div class="media" aria-label="3D site model preview"></div><a class="cta" href="#start">Start generating for free <span class="arrow">→</span></a></section>
   <section><div class="heading"><span class="kicker">WHY SHAPEZO</span><h2>Build the context for your project in a fraction of the time.</h2><p>Shapezo gives teams an editable 3D starting point from satellite imagery, so they can move from site research to design and presentation without rebuilding the surrounding world by hand.</p></div><div class="feature-track" id="whyTrack"><article class="feature-card"><div class="feature-image start"></div><div class="feature-copy"><h3>Start faster <span class="arrow">↗</span></h3><p>Generate a usable 3D site context in seconds instead of spending days on manual blockout and site preparation.</p></div></article><article class="feature-card"><div class="feature-image control"></div><div class="feature-copy"><h3>Stay in control <span class="arrow">↗</span></h3><p>Keep buildings, terrain, water and vegetation as editable layers that you can review, adjust and refine.</p></div></article><article class="feature-card"><div class="feature-image workflow"></div><div class="feature-copy"><h3>Fit your workflow <span class="arrow">↗</span></h3><p>Take the model into the 3D, BIM, GIS or game-engine tools your team already uses.</p></div></article></div><div class="dots" id="whyDots"><button aria-label="Start faster"></button><button aria-label="Stay in control"></button><button aria-label="Fit your workflow"></button></div></section>
   <section class="editable"><div class="heading"><span class="kicker">EDITABLE BY DESIGN</span><h2>Your model stays editable after generation.</h2><p>Shapezo gives you a structured 3D starting point, not a locked render. Edit individual buildings, manage each layer and move the result into your existing workflow.</p></div><div class="feature-card"><div class="feature-image control" id="editablePreview"></div><div class="layers"><button class="layer active" data-preview="assets/why-control.png"><div class="layer-thumb"></div>Show All</button><button class="layer" data-preview="assets/why-start.png"><div class="layer-thumb"></div>Buildings</button><button class="layer" data-preview="assets/why-workflow.png"><div class="layer-thumb"></div>Terrain</button><button class="layer" data-preview="assets/city-aerial.jpg"><div class="layer-thumb"></div>Trees</button></div></div><div class="benefits-viewport"><div class="benefits"><div class="benefit"><i class="check">✓</i><div><b>Edit individual building models</b>Replace or rotate a building and make object-level adjustments when the site needs a closer fit.</div></div><div class="benefit"><i class="check">✓</i><div><b>Manage each layer independently</b>Review each layer independently while keeping the full site visible.</div></div><div class="benefit"><i class="check">✓</i><div><b>Keep your workflow moving</b>Move the model into the compatible 3D, BIM, GIS or game-engine tools your team uses.</div></div></div></div></section>
-  <section class="steps-section"><div class="heading"><span class="kicker">HOW IT WORKS</span><h2>AI generation with object-level control.</h2><p>Shapezo combines automatic site recognition, rapid 3D scene generation and hands-on building edits in one workflow.</p></div><article class="step-card"><div class="step-image"></div><div class="step-copy"><span class="step-no">01 / RECOGNIZE</span><h3>Recognize the site automatically</h3><p>Identify building footprints from satellite imagery<br>Estimate building heights and infer building types<br>Analyze surrounding vegetation information</p></div></article><div class="dots"><i></i><i></i><i></i></div></section>
+  <section class="steps-section"><div class="heading"><span class="kicker">为什么选择造形家?</span><h2>框选即生成，告别复杂操作，人人都能做三维模型设计</h2></div><article class="step-card"><div class="step-image"></div><div class="step-copy"><span class="step-no">01 / AI建筑识别</span><h3>AI建筑识别</h3><p>通过AI技术解析卫星图影像，识别建筑轮廓，测算高度与建筑类型，自动生成匹配的三维模型。</p></div></article><div class="dots"><i></i><i></i><i></i></div></section>
   <section><div class="heading"><span class="kicker">HOW IT WORKS</span><h2>From satellite imagery to editable 3D buildings in just a few simple steps.</h2><p>No drone surveys. No manual blockout. Simply select an area, let Shapezo generate the buildings and surrounding site layers, then refine and export.</p></div><article class="step-card"><div class="step-copy"><span class="step-no">01 / SELECT</span><h3>Select an area</h3><p>Choose a location and draw the exact area you want to model.</p></div></article><div class="dots step-dots"><i></i><i></i><i></i><i></i></div></section>
   <section class="stack"><div class="heading"><span class="kicker">WORKS WITH YOUR STACK</span><h2>Bring the model into the tools your team already knows.</h2><p>Use Shapezo as the fast world-building layer for 3D, game, BIM, GIS and digital-twin workflows.</p></div><div class="stack-viewport" aria-label="Supported tools"><div class="stack-visual"><div class="stack-group"><h3>Game Engine</h3><div class="tools"><div class="tool"><strong>△</strong>Unreal Engine</div><div class="tool"><strong>▣</strong>Unity</div></div></div><div class="stack-group"><h3>3D Modeling</h3><div class="tools"><div class="tool"><strong>◈</strong>Blender</div></div></div><div class="stack-group"><h3>BIM</h3><div class="tools"><div class="tool"><strong>▰</strong>Revit</div><div class="tool"><strong>⬡</strong>Rhino</div><div class="tool"><strong>▱</strong>Sketch Up</div></div></div><div class="stack-group"><h3>GIS</h3><div class="tools"><div class="tool"><strong>◎</strong>ArcGIS Pro</div><div class="tool"><strong>G</strong>GISBox</div></div></div><div class="stack-group"><h3>Digital Twin</h3><div class="tools"><div class="tool"><strong>⌁</strong>Wings Engine</div></div></div><div class="stack-group" aria-hidden="true"><h3>Game Engine</h3><div class="tools"><div class="tool"><strong>△</strong>Unreal Engine</div><div class="tool"><strong>▣</strong>Unity</div></div></div><div class="stack-group" aria-hidden="true"><h3>3D Modeling</h3><div class="tools"><div class="tool"><strong>◈</strong>Blender</div></div></div><div class="stack-group" aria-hidden="true"><h3>BIM</h3><div class="tools"><div class="tool"><strong>▰</strong>Revit</div><div class="tool"><strong>⬡</strong>Rhino</div><div class="tool"><strong>▱</strong>Sketch Up</div></div></div><div class="stack-group" aria-hidden="true"><h3>GIS</h3><div class="tools"><div class="tool"><strong>◎</strong>ArcGIS Pro</div><div class="tool"><strong>G</strong>GISBox</div></div></div><div class="stack-group" aria-hidden="true"><h3>Digital Twin</h3><div class="tools"><div class="tool"><strong>⌁</strong>Wings Engine</div></div></div></div></div></section>
   <section class="final" id="start"><div class="heading"><span class="kicker">START WITH A REAL SITE</span><h2>Ready to turn a map area into 3D?</h2><p>Select an area, generate editable buildings and surrounding site layers, and preview the result in seconds.</p></div><a class="cta" href="#top">Start generating for free <span class="arrow">→</span></a></section>
   <footer class="footer"><p>Company: Wings Digital Technology (HK) Co., Limited</p><p>Email: help@wingsengine.com</p><div class="partners"><b>Partners</b><div class="partner-list"><span>Wings Engine</span><span>GISBox</span><span>Translight 3D</span></div></div></footer>
 </main><script>
+  const heroMedia = document.querySelector('.hero .media');
+  heroMedia.setAttribute('role', 'img');
+  heroMedia.setAttribute('aria-label', '3D site model video preview');
   const preview = document.getElementById('editablePreview');
   const editableSources = ['assets/editable-all.jpg','assets/editable-buildings.jpg','assets/editable-terrain.jpg','assets/editable-trees.jpg'];
   document.querySelectorAll('[data-preview]').forEach((tab, index) => tab.dataset.preview = editableSources[index]);
@@ -87,9 +94,9 @@
   const stepsTrack = document.createElement('div');
   stepsTrack.className = 'steps-track';
   const stepData = [
-    ['01 / RECOGNIZE','Recognize the site automatically','Identify building footprints, estimate building heights and analyze surrounding vegetation from satellite imagery.','assets/why-workflow.png'],
-    ['02 / GENERATE','Generate from satellite imagery','Build terrain, buildings, roads and vegetation from your selected area in seconds.','assets/asset-1.png'],
-    ['03 / REFINE','Refine the model','Edit objects layer by layer and adjust the model before export.','assets/why-control.png']
+    ['01 / AI建筑识别','AI建筑识别','通过AI技术解析卫星图影像，识别建筑轮廓，测算高度与建筑类型，自动生成匹配的三维模型。','assets/figma-ai-recognition.png'],
+    ['02 / 场地重建','场地重建','通过整合建筑、植被生成结果和地形数据，重建出媲美倾斜摄影的三维场地场景。','assets/figma-site-base.png'],
+    ['03 / 手动调整','手动调整','允许手动调整建筑类型、位置、旋转角度、高度等参数，精细调控，快速适配真实场景。','assets/figma-manual-adjust.png']
   ];
   stepsTrack.innerHTML = stepData.map(([no,title,copy,img]) => `<article class="step-card"><div class="step-image" style="background-image:url('${img}')"></div><div class="step-copy"><span class="step-no">${no}</span><h3>${title}</h3><p>${copy}</p></div></article>`).join('');
   originalStep.replaceWith(stepsTrack);
@@ -122,4 +129,33 @@
     image.alt = '';
     icon.replaceWith(image);
   });
+  const revealSelectors = [
+    '.eyebrow', '.heading > .kicker', '.heading > h2', '.heading > p',
+    '.hero > h1', '.hero > p', '.trust', '.hero > .media', '.hero > .cta',
+    '.feature-track .feature-image', '.feature-track .feature-copy', '.feature-track + .dots',
+    '.editable > .feature-card', '.benefits-viewport',
+    '.steps-section .step-image', '.steps-section .step-copy', '.steps-section .dots',
+    'section:not(.steps-section) > .steps-track .step-image', 'section:not(.steps-section) > .steps-track .step-copy',
+    '.stack-viewport', '.final .cta', '.footer > p', '.footer .partners'
+  ];
+  const revealItems = [...document.querySelectorAll(revealSelectors.join(','))];
+  if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const revealOrder = new Map();
+    revealItems.forEach((item) => {
+      const section = item.closest('section, footer');
+      const order = revealOrder.get(section) || 0;
+      revealOrder.set(section, order + 1);
+      item.classList.add('reveal-item');
+      if (item.matches('.media, .feature-image, .step-image, .feature-card, .stack-viewport')) item.classList.add('reveal-media');
+      item.style.setProperty('--reveal-delay', `${Math.min(order, 4) * 55}ms`);
+    });
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
+      });
+    }, { threshold: 0.16, rootMargin: '0px 0px -6% 0px' });
+    revealItems.forEach((item) => revealObserver.observe(item));
+  }
 </script></body></html>
