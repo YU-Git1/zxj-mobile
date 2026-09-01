@@ -77,17 +77,38 @@
   document.querySelector('.editable h2').innerHTML = 'Your model stays<br>editable after<br>generation.';
   const preview = document.getElementById('editablePreview');
   const editableSources = ['assets/editable-all.jpg','assets/editable-buildings.jpg','assets/editable-terrain.jpg','assets/editable-trees.jpg'];
-  document.querySelectorAll('[data-preview]').forEach((tab, index) => tab.dataset.preview = editableSources[index]);
-  const activeEditableTab = document.querySelector('.layer.active');
-  preview.style.backgroundImage = `url('${activeEditableTab.dataset.preview}')`;
-  document.querySelectorAll('[data-preview]').forEach((tab) => tab.addEventListener('click', () => {
-    document.querySelectorAll('[data-preview]').forEach((item) => {
-      const isActive = item === tab;
+  const editableTabs = [...document.querySelectorAll('[data-preview]')];
+  const editableCard = document.querySelector('.editable > .feature-card');
+  let editableIndex = editableTabs.findIndex((tab) => tab.classList.contains('active'));
+  let editableTimer;
+  editableTabs.forEach((tab, index) => tab.dataset.preview = editableSources[index]);
+  const setEditableLayer = (index) => {
+    editableIndex = (index + editableTabs.length) % editableTabs.length;
+    editableTabs.forEach((item, itemIndex) => {
+      const isActive = itemIndex === editableIndex;
       item.classList.toggle('active', isActive);
       item.setAttribute('aria-pressed', String(isActive));
     });
-    preview.style.backgroundImage = `url('${tab.dataset.preview}')`;
+    preview.style.backgroundImage = `url('${editableTabs[editableIndex].dataset.preview}')`;
+  };
+  const stopEditableAuto = () => clearInterval(editableTimer);
+  const startEditableAuto = () => {
+    if (reduceMotion) return;
+    stopEditableAuto();
+    editableTimer = setInterval(() => setEditableLayer(editableIndex + 1), 3000);
+  };
+  editableTabs.forEach((tab, index) => tab.addEventListener('click', () => {
+    setEditableLayer(index);
+    startEditableAuto();
   }));
+  editableCard.addEventListener('pointerenter', stopEditableAuto);
+  editableCard.addEventListener('pointerleave', startEditableAuto);
+  editableCard.addEventListener('focusin', stopEditableAuto);
+  editableCard.addEventListener('focusout', (event) => { if (!editableCard.contains(event.relatedTarget)) startEditableAuto(); });
+  editableCard.addEventListener('touchstart', stopEditableAuto, { passive: true });
+  editableCard.addEventListener('touchend', startEditableAuto, { passive: true });
+  setEditableLayer(editableIndex < 0 ? 0 : editableIndex);
+  startEditableAuto();
   const benefitsTrack = document.querySelector('.benefits');
   [...benefitsTrack.children].forEach((card) => {
     const clone = card.cloneNode(true);
