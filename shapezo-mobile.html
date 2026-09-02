@@ -298,9 +298,9 @@
     const track = document.createElement('div');
     track.className = 'steps-track delivery-track';
     const data = isChinese ? [
-      { no:'01 / 定位', title:'实时定位与地图浏览，快速锁定目标区域', copy:'支持实时位置定位，无需复杂操作即可快速完成目标区域选择', img:'assets/delivery-location.jpg' },
-      { no:'02 / 生成', title:'AI自动生成真实三维场景', copy:'解析卫星图与地理信息，快速生成建筑、地形、水体和植被', img:'assets/delivery-generation.jpg' },
-      { no:'03 / 交付', title:'编辑并导出完整场地模型', copy:'完成模型调整后，导入常用三维、BIM与GIS平台继续工作', img:'assets/delivery-export.jpg' }
+      { no:'01 / 选择', title:'选择目标区域', copy:'定位地图并框选需要生成三维模型的准确范围', img:'assets/delivery-location.jpg' },
+      { no:'02 / 生成', title:'从卫星图生成模型', copy:'基于卫星图与地理信息生成地形、建筑、道路和植被', img:'assets/delivery-generation.jpg' },
+      { no:'03 / 精修', title:'精修三维场地模型', copy:'按图层编辑对象并调整模型，完成导出前的最后优化', img:'assets/delivery-export.jpg' }
     ] : [
       { no:'01 / SELECT', title:'Select an area', copy:'Choose a location and draw the exact area you want to model.' },
       { no:'02 / GENERATE', title:'Generate from satellite imagery', copy:'Build terrain, buildings, roads and vegetation from your selected area.' },
