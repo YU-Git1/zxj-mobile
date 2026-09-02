@@ -6,7 +6,7 @@
   <title>Shapezo | AI 3D Site Model Generator</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root{--bg:#0e1414;--panel:#121a1a;--cyan:#00b1cc;--muted:rgba(255,255,255,.42);--line:rgba(0,177,204,.14)}
     *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:#fff;font-family:Inter,system-ui,sans-serif;font-size:14px;line-height:1.45}a{color:inherit;text-decoration:none}.page{width:100%;max-width:767px;min-width:320px;margin:auto;overflow:hidden;background:var(--bg)}
@@ -42,32 +42,93 @@
     .steps-section{min-height:0}.steps-section .step-card{min-height:358px;overflow:hidden;background:rgba(0,177,204,.01);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}.steps-section .step-image{aspect-ratio:16/9;background-position:center;background-size:cover;border:1px solid rgba(255,255,255,.04)}.steps-section .step-copy{display:flex;flex-direction:column;gap:12px;padding:24px 0 8px}.step-no{display:block;line-height:18px}.steps-section .step-copy h3{display:flex;align-items:center;gap:8px;margin:0;line-height:24px}.steps-section .step-copy h3::before{content:"";display:block;width:4px;height:20px;flex:0 0 4px;background:var(--cyan);border-radius:1px}.step-lines{display:flex;flex-direction:column;gap:4px;margin:0;padding:0 0 0 18px;list-style:disc;color:var(--muted);font-size:12px;line-height:20px}.step-lines li{padding-left:2px}.delivery-card{height:192px;padding:24px 16px}.delivery-head{display:flex;align-items:center;justify-content:space-between;height:24px}.delivery-head .step-no{line-height:20px}.delivery-body{margin-top:24px}.delivery-body h3{margin:0 0 8px;font-size:16px;line-height:24px}.delivery-body p{margin:0;color:var(--muted);font-size:12px;line-height:20px}
     .stack-viewport{margin-top:24px}.footer{font-size:14px;line-height:22px}.footer-contact{display:flex;flex-direction:column;gap:8px;height:74px}.footer p{margin:0}.partners{height:60px;margin-top:48px}.partners b{margin-bottom:16px;line-height:22px}.partner-list{flex-wrap:nowrap;line-height:22px}
     .feature-track,.steps-track{padding-bottom:0!important;touch-action:pan-x pan-y}.benefits-viewport,.stack-viewport{overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;touch-action:pan-x}.benefits-viewport::-webkit-scrollbar,.stack-viewport::-webkit-scrollbar{display:none}.benefits,.stack-visual{animation:none!important}.stack-group{padding:11px 8px 7px}.final{border-top:0}.nav{width:100%}
+    .cn-only{display:none}.lang-zh{font-family:"Noto Sans SC",Inter,system-ui,sans-serif}.lang-zh .cn-only{display:block}.lang-zh .menu-panel a.cn-only{display:flex}.lang-zh .en-only,.lang-zh .trust,.lang-zh .benefits-viewport,.lang-zh .why-section .kicker,.lang-zh .editable .kicker,.lang-zh .steps-section .kicker,.lang-zh .stack .kicker,.lang-zh .final .kicker{display:none}.lang-zh .menu-panel{max-height:400px}.lang-zh .hero .cta,.lang-zh .final .cta{width:160px}.lang-zh .why-section .feature-card{display:flex;flex-direction:column;gap:24px}.lang-zh .why-section .feature-copy{order:-1;padding-top:0}.lang-zh .why-section .feature-copy h3,.cn-title{position:relative;padding-left:16px}.lang-zh .why-section .feature-copy h3::before,.cn-title::before{content:"";position:absolute;left:0;top:2px;width:4px;height:20px;border-radius:1px;background:var(--cyan)}.lang-zh .editable{display:flex;flex-direction:column;align-items:center;gap:24px}.lang-zh .editable .heading{width:100%}.lang-zh .editable>.feature-card{width:100%;margin-top:0}.lang-zh .editable>.cta{order:0;width:120px;height:40px;margin:0;border-radius:4px;font-size:16px}.lang-zh .scene-grid{display:grid;gap:48px;margin-top:48px}.scene-item{display:grid;gap:24px}.scene-image{width:100%;aspect-ratio:16/9;border-radius:4px;object-fit:cover}.scene-copy h3{margin:0 0 8px;font-size:16px;line-height:24px}.scene-copy p{margin:0;color:var(--muted);font-size:12px;line-height:20px}.lang-zh .delivery-card{height:auto;padding:12px}.delivery-image{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:4px}.lang-zh .delivery-body{margin-top:24px}.tutorial-track{margin-top:48px}.tutorial-card{height:192px;padding:24px 16px}.tutorial-head{display:flex;align-items:center;justify-content:space-between;color:var(--cyan);font-size:12px;line-height:20px}.tutorial-card h3{margin:24px 0 8px;font-size:16px;line-height:24px}.tutorial-card p{margin:0;color:var(--muted);font-size:12px;line-height:20px}.lang-zh .footer-contact{height:auto}.lang-zh .footer-contact p{color:rgba(255,255,255,.8)}
     @media(min-width:376px) and (max-width:767px){.page,.nav-shell{width:100%;max-width:767px}}
   </style>
 </head>
 <body><main class="page">
-  <div class="nav-shell"><header class="nav"><a class="logo" href="#top" aria-label="Shapezo home"><img src="assets/shapezo-logo.svg" alt="Shapezo"></a><div class="nav-actions"><a class="nav-button" href="#start">Generate Now</a><button class="menu" type="button" aria-label="Menu" aria-expanded="false" aria-controls="menuPanel"><img src="assets/menu.svg" alt=""></button></div></header><nav class="menu-panel" id="menuPanel" aria-label="Primary navigation" aria-hidden="true"><a href="#why">Why Shapezo</a><a href="#editable">Editable model</a><a href="#workflow">How it works</a><a href="#stack">Supported tools</a><div class="language-switch" role="group" aria-label="Language"><button type="button" aria-pressed="true">English</button><button type="button" aria-pressed="false" disabled title="Chinese version coming soon">中文</button></div></nav></div>
+  <div class="nav-shell"><header class="nav"><a class="logo" href="#top" aria-label="Shapezo home"><img src="assets/shapezo-logo.svg" alt="Shapezo"></a><div class="nav-actions"><a class="nav-button" href="#start">Generate Now</a><button class="menu" type="button" aria-label="Menu" aria-expanded="false" aria-controls="menuPanel"><img src="assets/menu.svg" alt=""></button></div></header><nav class="menu-panel" id="menuPanel" aria-label="Primary navigation" aria-hidden="true"><a href="#why">Why Shapezo</a><a href="#editable">Editable model</a><a href="#workflow">How it works</a><a class="cn-only" href="#scenes">复杂场景</a><a href="#stack">Supported tools</a><a class="cn-only" href="#tutorials">教程文档</a><div class="language-switch" role="group" aria-label="Language"><button id="languageEnglish" type="button" aria-pressed="true">English</button><button id="languageChinese" type="button" aria-pressed="false">中文</button></div></nav></div>
   <section class="hero" id="top"><span class="eyebrow">AI 3D SITE MODEL GENERATOR</span><h1>Turn Any Map Area into an Editable 3D Site Model</h1><p>Generate buildings, terrain, water and vegetation from satellite and map data. Preview your site in seconds and export models for Unity, Unreal, Blender, BIM and GIS workflows.</p><div class="trust"><span><img class="check-icon" src="assets/check.svg" alt="">No drone survey required</span><span><img class="check-icon" src="assets/check.svg" alt="">Preview before export</span><span><img class="check-icon" src="assets/check.svg" alt="">Layer-by-layer editing</span></div><div class="media" aria-label="3D site model video preview"><video autoplay muted loop playsinline preload="metadata" poster="assets/hero-video-poster.png" aria-label="3D site model video preview"><source src="assets/intl-reference-hero.mp4" type="video/mp4">Your browser does not support the video element.</video></div><a class="cta" href="#start">Start generating for free <img src="assets/arrow-right.svg" alt=""></a></section>
   <section class="why-section" id="why"><div class="heading"><span class="kicker">WHY SHAPEZO</span><h2>Build the context for your project in a fraction of the time.</h2><p>Shapezo gives teams an editable 3D starting point from satellite imagery, so they can move from site research to design and presentation without rebuilding the surrounding world by hand.</p></div><div class="feature-track" id="whyTrack"><article class="feature-card"><div class="feature-image start"></div><div class="feature-copy"><h3>Start faster <img class="arrow-icon" src="assets/arrow-up-right.svg" alt=""></h3><p>Generate a usable 3D site context in seconds instead of spending days on manual blockout and site preparation.</p></div></article><article class="feature-card"><div class="feature-image control"></div><div class="feature-copy"><h3>Stay in control <img class="arrow-icon" src="assets/arrow-up-right.svg" alt=""></h3><p>Keep buildings, terrain, water and vegetation as editable layers that you can review, adjust and refine.</p></div></article><article class="feature-card"><div class="feature-image workflow"></div><div class="feature-copy"><h3>Fit your workflow <img class="arrow-icon" src="assets/arrow-up-right.svg" alt=""></h3><p>Take the model into the 3D, BIM, GIS or game-engine tools your team already uses.</p></div></article></div><div class="dots" id="whyDots"><button type="button" aria-label="Start faster"></button><button type="button" aria-label="Stay in control"></button><button type="button" aria-label="Fit your workflow"></button></div></section>
   <section class="editable" id="editable"><div class="heading"><span class="kicker">EDITABLE BY DESIGN</span><h2>Your model stays editable after generation.</h2><p>Shapezo gives you a structured 3D starting point, not a locked render. Edit individual buildings, manage each layer and move the result into your existing workflow.</p></div><div class="feature-card"><div class="feature-image control" id="editablePreview"></div><div class="layers"><button class="layer" type="button" aria-pressed="false" data-preview="assets/editable-all.jpg"><span class="layer-thumb"><img src="assets/editable-layer-all.png" alt=""></span>Show All</button><button class="layer" type="button" aria-pressed="false" data-preview="assets/editable-buildings.jpg"><span class="layer-thumb"><img src="assets/editable-layer-buildings.png" alt=""></span>Buildings</button><button class="layer" type="button" aria-pressed="false" data-preview="assets/editable-terrain.jpg"><span class="layer-thumb"><img src="assets/editable-layer-terrain.png" alt=""></span>Terrain</button><button class="layer active" type="button" aria-pressed="true" data-preview="assets/editable-trees.jpg"><span class="layer-thumb"><img src="assets/editable-layer-trees.png" alt=""></span>Trees</button></div></div><div class="benefits-viewport"><div class="benefits"><div class="benefit"><img src="assets/success.svg" alt=""><div><b>Edit individual building models</b>Replace or rotate a building and make object-level adjustments when the site needs a closer fit.</div></div><div class="benefit"><img src="assets/success.svg" alt=""><div><b>Manage each layer independently</b>Review each layer independently while keeping the full site visible.</div></div><div class="benefit"><img src="assets/success.svg" alt=""><div><b>Keep your workflow moving</b>Move the model into the compatible 3D, BIM, GIS or game-engine tools your team uses.</div></div></div></div></section>
   <section class="steps-section" id="workflow"><div class="heading"><span class="kicker">HOW IT WORKS</span><h2>AI generation with object-level control.</h2><p>Shapezo combines automatic site recognition, rapid 3D scene generation and hands-on building edits in one workflow.</p></div><article class="step-card"><div class="step-image"></div><div class="step-copy"><span class="step-no">01 / RECOGNIZE</span><h3>Recognize the site automatically</h3><p class="step-lines"><span>Identify building footprints from satellite imagery</span><span>Estimate building heights and infer building types</span><span>Analyze surrounding vegetation information</span></p></div></article><div class="dots"><i></i><i></i><i></i></div></section>
   <section class="delivery-section"><div class="heading"><span class="kicker">HOW IT WORKS</span><h2>From satellite imagery to editable 3D buildings in just a few simple steps.</h2><p>No drone surveys. No manual blockout. Simply select an area, let Shapezo generate the buildings and surrounding site layers, then refine and export.</p></div><article class="step-card delivery-card"><div class="delivery-head"><span class="step-no">01 / SELECT</span><img class="arrow-icon" src="assets/arrow-up-right.svg" alt=""></div><div class="delivery-body"><h3>Select an area</h3><p>Choose a location and draw the exact area you want to model.</p></div></article><div class="dots step-dots"><i></i><i></i><i></i><i></i></div></section>
+  <section class="cn-only scenes-section" id="scenes"><div class="heading"><h2>AI智能生成复杂三维场景</h2><p>融合AI空间理解能力，自动解析复杂环境要素，快速构建高还原度三维场景模型</p></div><div class="scene-grid"><article class="scene-item"><img class="scene-image" src="assets/ai-scene/interchange.png" alt="AI生成的三维立交桥场景"><div class="scene-copy"><h3>生成立交桥</h3><p>通过AI算法精准识别立交桥结构、桥墩立柱、道路关系及周边环境，快速生成高精度三维立交桥模型</p></div></article><article class="scene-item"><img class="scene-image" src="assets/ai-scene/water.png" alt="AI生成的三维水域场景"><div class="scene-copy"><h3>生成水面</h3><p>智能分析地形与水域特征，自动生成 Flowmap，精准模拟水流方向与动态效果，打造自然融合的高真实感水域场景</p></div></article></div></section>
   <section class="stack"><div class="heading"><span class="kicker">WORKS WITH YOUR STACK</span><h2>Bring the model into the tools your team already knows.</h2><p>Use Shapezo as the fast world-building layer for 3D, game, BIM, GIS and digital-twin workflows.</p></div><div class="stack-viewport" aria-label="Supported tools"><div class="stack-visual"><div class="stack-group"><h3>Game Engine</h3><div class="tools"><div class="tool"><strong>△</strong>Unreal Engine</div><div class="tool"><strong>▣</strong>Unity</div></div></div><div class="stack-group"><h3>3D Modeling</h3><div class="tools"><div class="tool"><strong>◈</strong>Blender</div></div></div><div class="stack-group"><h3>BIM</h3><div class="tools"><div class="tool"><strong>▰</strong>Revit</div><div class="tool"><strong>⬡</strong>Rhino</div><div class="tool"><strong>▱</strong>Sketch Up</div></div></div><div class="stack-group"><h3>GIS</h3><div class="tools"><div class="tool"><strong>◎</strong>ArcGIS Pro</div><div class="tool"><strong>G</strong>GISBox</div></div></div><div class="stack-group"><h3>Digital Twin</h3><div class="tools"><div class="tool"><strong>⌁</strong>Wings Engine</div></div></div><div class="stack-group" aria-hidden="true"><h3>Game Engine</h3><div class="tools"><div class="tool"><strong>△</strong>Unreal Engine</div><div class="tool"><strong>▣</strong>Unity</div></div></div><div class="stack-group" aria-hidden="true"><h3>3D Modeling</h3><div class="tools"><div class="tool"><strong>◈</strong>Blender</div></div></div><div class="stack-group" aria-hidden="true"><h3>BIM</h3><div class="tools"><div class="tool"><strong>▰</strong>Revit</div><div class="tool"><strong>⬡</strong>Rhino</div><div class="tool"><strong>▱</strong>Sketch Up</div></div></div><div class="stack-group" aria-hidden="true"><h3>GIS</h3><div class="tools"><div class="tool"><strong>◎</strong>ArcGIS Pro</div><div class="tool"><strong>G</strong>GISBox</div></div></div><div class="stack-group" aria-hidden="true"><h3>Digital Twin</h3><div class="tools"><div class="tool"><strong>⌁</strong>Wings Engine</div></div></div></div></div></section>
+  <section class="cn-only tutorials-section" id="tutorials"><div class="heading"><h2>教程文档</h2><p>零基础也能轻松生成三维模型</p></div><div class="steps-track tutorial-track"><article class="step-card tutorial-card"><div class="tutorial-head"><span>前往视频中心</span><img class="arrow-icon" src="assets/arrow-up-right.svg" alt=""></div><h3>热门推荐</h3><p>查看造形家常用功能与场景建模教程。</p></article><article class="step-card tutorial-card"><div class="tutorial-head"><span>快速入门</span><img class="arrow-icon" src="assets/arrow-up-right.svg" alt=""></div><h3>框选区域并生成模型</h3><p>从地图定位开始，快速完成第一个三维场景。</p></article><article class="step-card tutorial-card"><div class="tutorial-head"><span>模型编辑</span><img class="arrow-icon" src="assets/arrow-up-right.svg" alt=""></div><h3>编辑建筑与场景图层</h3><p>掌握建筑、地形、水体和植被图层的独立编辑方法。</p></article><article class="step-card tutorial-card"><div class="tutorial-head"><span>成果交付</span><img class="arrow-icon" src="assets/arrow-up-right.svg" alt=""></div><h3>导出到常用三维平台</h3><p>将生成结果接入 BIM、GIS、建模软件和游戏引擎。</p></article></div><div class="dots tutorial-dots"><button type="button" aria-label="教程 1"></button><button type="button" aria-label="教程 2"></button><button type="button" aria-label="教程 3"></button><button type="button" aria-label="教程 4"></button></div></section>
   <section class="final" id="start"><div class="heading"><span class="kicker">START WITH A REAL SITE</span><h2>Ready to turn a map area into 3D?</h2><p>Select an area, generate editable buildings and surrounding site layers, and preview the result in seconds.</p></div><a class="cta" href="#top">Start generating for free <img src="assets/arrow-right.svg" alt=""></a></section>
   <footer class="footer"><div class="footer-contact"><p>Company: Wings Digital Technology (HK) Co., Limited</p><p>Email: help@wingsengine.com</p></div><div class="partners"><b>Partners</b><div class="partner-list"><span>Wings Engine</span><span>GISBox</span><span>Translight 3D</span></div></div></footer>
 </main><script>
   const heroMedia = document.querySelector('.hero .media');
   heroMedia.setAttribute('role', 'region');
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const isChinese = new URLSearchParams(window.location.search).get('lang') === 'zh';
+  document.documentElement.lang = isChinese ? 'zh-CN' : 'en';
+  document.body.classList.toggle('lang-zh', isChinese);
+  document.title = isChinese ? '造形家 | AI 三维场地模型生成器' : 'Shapezo | AI 3D Site Model Generator';
+  const languageEnglish = document.getElementById('languageEnglish');
+  const languageChinese = document.getElementById('languageChinese');
+  languageEnglish.setAttribute('aria-pressed', String(!isChinese));
+  languageChinese.setAttribute('aria-pressed', String(isChinese));
+  const changeLanguage = (language) => {
+    const url = new URL(window.location.href);
+    if (language === 'zh') url.searchParams.set('lang', 'zh'); else url.searchParams.delete('lang');
+    url.hash = '';
+    window.location.href = url.href;
+  };
+  languageEnglish.addEventListener('click', () => changeLanguage('en'));
+  languageChinese.addEventListener('click', () => changeLanguage('zh'));
+  if (isChinese) {
+    const setText = (selector, value) => { const element = document.querySelector(selector); if (element) element.textContent = value; };
+    setText('.nav-button', '立即生成');
+    const navLinks = [...document.querySelectorAll('.menu-panel > a')];
+    ['为什么选择造形家', '图层控制', 'AI生成与编辑', '复杂场景', '支持平台', '教程文档'].forEach((label, index) => { navLinks[index].textContent = label; });
+    setText('.hero .eyebrow', 'AI 三维建模工具');
+    setText('.hero h1', '框选地图，AI一键生成3D场地模型');
+    setText('.hero > p', '无需航拍，框选地图即可AI生成3D建筑场景，助力BIM建模并为倾斜摄影提供高效平替方案');
+    document.querySelector('.hero .cta').childNodes[0].textContent = '免费生成建筑 ';
+    setText('.why-section h2', '为什么选择造形家?');
+    setText('.why-section .heading p', '框选即生成，告别复杂操作，人人都能做三维模型设计');
+    const whyContent = [
+      ['AI建筑识别', '通过AI技术解析卫星图影像，识别建筑轮廓，测算高度与建筑类型，自动生成匹配的三维模型'],
+      ['AI一键生成三维场景', '融合建筑、地形、水体与植被信息，快速生成结构完整的真实三维场地模型'],
+      ['模型可编辑可交付', '生成结果保留对象与图层结构，可继续编辑并导入常用三维平台完成后续工作']
+    ];
+    document.querySelectorAll('#whyTrack .feature-card').forEach((card, index) => { card.querySelector('h3').childNodes[0].textContent = `${whyContent[index][0]} `; card.querySelector('p').textContent = whyContent[index][1]; });
+    setText('.editable h2', '每一个图层，都可以单独掌控');
+    setText('.editable .heading p', '通过AI算法识别并解析建筑、地形、水体与植被等图层，支持独立预览、导出与编辑');
+    ['显示全部', '建筑', '地形', '树木'].forEach((label, index) => { const tab = document.querySelectorAll('.layer')[index]; tab.lastChild.textContent = label; tab.classList.toggle('active', index === 0); tab.setAttribute('aria-pressed', String(index === 0)); });
+    const editableCta = document.createElement('a');
+    editableCta.className = 'cta'; editableCta.href = '#start'; editableCta.innerHTML = '立即生成 <img src="assets/arrow-right.svg" alt="">';
+    document.querySelector('.editable .heading').after(editableCta);
+    setText('.steps-section h2', 'AI 智能生成+手动编辑，精准构建真实三维场地模型');
+    setText('.steps-section .heading p', 'AI快速完成场地模型生成，支持建筑高度、类型、位置及角度自由编辑，让生成模型更贴近真实世界');
+    setText('.delivery-section .kicker', '可编辑的设计');
+    setText('.delivery-section h2', '从卫星图到真实三维场景，轻松实现成果交付');
+    setText('.delivery-section .heading p', '从地图定位、三维建模到成果交付，无需专业经验即可实现真实地理场景的数字化构建与应用');
+    setText('.stack .kicker', '支持主流工作流');
+    setText('.stack h2', '一键导入主流3D平台');
+    setText('.stack .heading p', '生成的模型支持导入多种主流平台，满足不同场景的应用需求');
+    ['游戏引擎', '建模软件', 'BIM', 'GIS', '数字孪生', '游戏引擎', '建模软件', 'BIM', 'GIS', '数字孪生'].forEach((label, index) => { document.querySelectorAll('.stack-group h3')[index].textContent = label; });
+    document.querySelectorAll('.tool').forEach((tool) => { if (tool.textContent.trim() === 'Wings Engine') tool.lastChild.textContent = '山海鲸可视化'; });
+    setText('.final h2', '准备好开始生成建筑模型了吗？');
+    setText('.final .heading p', '用造形家快速将二维图像转化为精美的3D建筑模型');
+    setText('.final .kicker', '立即开始真实场地');
+    document.querySelector('.final .cta').childNodes[0].textContent = '免费生成模型 ';
+    document.querySelector('.footer-contact').innerHTML = '<p>公司：杭州多算科技有限公司</p><p>电话：400-001-5969</p><p>地址：杭州市文一西路海创科技中心 311121</p>';
+    setText('.partners b', '友情链接：');
+    document.querySelector('.partner-list').innerHTML = '<span>山海鲸可视化</span><span>GISBox</span><span>斑斑AI低代码</span>';
+  }
   const navShell = document.querySelector('.nav-shell');
   const menuButton = document.querySelector('.menu');
   const menuPanel = document.getElementById('menuPanel');
   const setMenuOpen = (isOpen) => {
     navShell.classList.toggle('is-open', isOpen);
     menuButton.setAttribute('aria-expanded', String(isOpen));
-    menuButton.setAttribute('aria-label', isOpen ? 'Close menu' : 'Menu');
+    menuButton.setAttribute('aria-label', isOpen ? (isChinese ? '关闭菜单' : 'Close menu') : (isChinese ? '打开菜单' : 'Menu'));
     menuPanel.setAttribute('aria-hidden', String(!isOpen));
   };
+  setMenuOpen(false);
   const closeMenu = () => setMenuOpen(false);
   menuButton.addEventListener('click', () => {
     setMenuOpen(!navShell.classList.contains('is-open'));
@@ -76,8 +137,8 @@
   document.addEventListener('keydown', (event) => { if (event.key === 'Escape') closeMenu(); });
   const stackSection = document.querySelector('.stack');
   stackSection.id = 'stack';
-  stackSection.querySelector('.heading p').textContent = 'Use Shapezo as the fast world-building layer for 3D, game, BIM, GIS and digital-twin workflows. Supported output formats vary by workflow and integration.';
-  document.querySelector('.editable h2').innerHTML = 'Your model stays<br>editable after<br>generation.';
+  if (!isChinese) stackSection.querySelector('.heading p').textContent = 'Use Shapezo as the fast world-building layer for 3D, game, BIM, GIS and digital-twin workflows. Supported output formats vary by workflow and integration.';
+  if (!isChinese) document.querySelector('.editable h2').innerHTML = 'Your model stays<br>editable after<br>generation.';
   const preview = document.getElementById('editablePreview');
   const editableSources = ['assets/editable-all.jpg','assets/editable-buildings.jpg','assets/editable-terrain.jpg','assets/editable-trees.jpg'];
   const editableTabs = [...document.querySelectorAll('[data-preview]')];
@@ -161,7 +222,11 @@
   const originalStep = stepsSection.querySelector('.step-card');
   const stepsTrack = document.createElement('div');
   stepsTrack.className = 'steps-track';
-  const stepData = [
+  const stepData = isChinese ? [
+    { no:'01 / 自动识别', title:'AI 精准识别建筑轮廓', items:['AI 估算建筑真实高度','AI 校正建筑空间位置','AI 判断建筑类型'], img:'assets/workflow-recognize.jpg' },
+    { no:'02 / 自动生成', title:'AI 快速生成三维场景', items:['自动生成可编辑建筑模型','匹配真实地形与周边环境','生成水体与植被图层'], img:'assets/workflow-generate.jpg' },
+    { no:'03 / 手动编辑', title:'自由编辑建筑模型', items:['调整建筑类型、位置和角度','精细修改建筑高度与比例','保持模型与真实场地一致'], img:'assets/workflow-edit.jpg' }
+  ] : [
     { no:'01 / RECOGNIZE', title:'Recognize the site automatically', items:['Identify building footprints from satellite imagery','Estimate building heights and infer building types','Analyze surrounding vegetation information'], img:'assets/workflow-recognize.jpg' },
     { no:'02 / GENERATE', title:'Generate the full site context', items:['Create editable building models','Auto-match terrain for seamless integration','Generate water and vegetation layers'], img:'assets/workflow-generate.jpg' },
     { no:'03 / EDIT', title:'Edit individual buildings', items:['Adjust building type, position and rotation','Fine-tune building height and proportions','Keep every edit aligned to the real site'], img:'assets/workflow-edit.jpg' }
@@ -228,7 +293,28 @@
   addCarousel(document.getElementById('whyTrack'), document.getElementById('whyDots'));
   addCarousel(stepsTrack, stepDots);
   const deliverySection = document.querySelector('.delivery-section');
-  if (deliverySection) { const sourceCard = deliverySection.querySelector('.step-card'); const track = document.createElement('div'); track.className = 'steps-track delivery-track'; const data = [['01 / SELECT','Select an area','Choose a location and draw the exact area you want to model.'],['02 / GENERATE','Generate from satellite imagery','Build terrain, buildings, roads and vegetation from your selected area.'],['03 / REFINE','Refine the model','Edit objects layer by layer and adjust the model before export.'],['04 / DELIVER','Export and move on','Continue in BIM, GIS, Blender or a game engine.']]; track.innerHTML=data.map(([no,title,copy])=>`<article class="step-card delivery-card"><div class="delivery-head"><span class="step-no">${no}</span><img class="arrow-icon" src="assets/arrow-up-right.svg" alt=""></div><div class="delivery-body"><h3>${title}</h3><p>${copy}</p></div></article>`).join(''); sourceCard.replaceWith(track); const dots=deliverySection.querySelector('.dots'); dots.innerHTML=data.map((_,i)=>`<button type="button" aria-label="Delivery step ${i+1}" class="${i?'':'active'}"></button>`).join(''); addCarousel(track,dots); }
+  if (deliverySection) {
+    const sourceCard = deliverySection.querySelector('.step-card');
+    const track = document.createElement('div');
+    track.className = 'steps-track delivery-track';
+    const data = isChinese ? [
+      { no:'01 / 定位', title:'实时定位与地图浏览，快速锁定目标区域', copy:'支持实时位置定位，无需复杂操作即可快速完成目标区域选择', img:'assets/editable-all.jpg' },
+      { no:'02 / 生成', title:'AI自动生成真实三维场景', copy:'解析卫星图与地理信息，快速生成建筑、地形、水体和植被', img:'assets/figma-site-base.png' },
+      { no:'03 / 交付', title:'编辑并导出完整场地模型', copy:'完成模型调整后，导入常用三维、BIM与GIS平台继续工作', img:'assets/figma-site-overlay.png' }
+    ] : [
+      { no:'01 / SELECT', title:'Select an area', copy:'Choose a location and draw the exact area you want to model.' },
+      { no:'02 / GENERATE', title:'Generate from satellite imagery', copy:'Build terrain, buildings, roads and vegetation from your selected area.' },
+      { no:'03 / REFINE', title:'Refine the model', copy:'Edit objects layer by layer and adjust the model before export.' },
+      { no:'04 / DELIVER', title:'Export and move on', copy:'Continue in BIM, GIS, Blender or a game engine.' }
+    ];
+    track.innerHTML = data.map(({no,title,copy,img}) => `<article class="step-card delivery-card">${img ? `<img class="delivery-image" src="${img}" alt="">` : `<div class="delivery-head"><span class="step-no">${no}</span><img class="arrow-icon" src="assets/arrow-up-right.svg" alt=""></div>`}<div class="delivery-body"><h3>${title}</h3><p>${copy}</p></div></article>`).join('');
+    sourceCard.replaceWith(track);
+    const dots = deliverySection.querySelector('.dots');
+    dots.innerHTML = data.map((_, index) => `<button type="button" aria-label="${isChinese ? '交付步骤' : 'Delivery step'} ${index + 1}" class="${index ? '' : 'active'}"></button>`).join('');
+    addCarousel(track, dots);
+    if (isChinese) stackSection.after(deliverySection);
+  }
+  if (isChinese) addCarousel(document.querySelector('.tutorial-track'), document.querySelector('.tutorial-dots'));
 </script><script>
   const stackIcons = {
     '△': 'assets/unreal.png',
@@ -255,7 +341,7 @@
     '.feature-track .feature-image', '.feature-track .feature-copy', '.feature-track + .dots',
     '.editable > .feature-card', '.benefits-viewport',
     '.steps-section .step-image', '.steps-section .step-copy', '.steps-section .dots',
-    '.delivery-section .delivery-card',
+    '.delivery-section .delivery-card', '.scenes-section .scene-item', '.tutorials-section .tutorial-card',
     '.stack-viewport', '.final .cta', '.footer-contact > p', '.footer .partners'
   ];
   const revealItems = [...document.querySelectorAll(revealSelectors.join(','))];
