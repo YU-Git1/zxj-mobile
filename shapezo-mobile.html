@@ -41,7 +41,7 @@
     .editable>.feature-card{margin-top:24px}.benefits-viewport{height:70px;padding-bottom:0}.benefit{height:70px;min-height:70px;padding:4px 4px 4px 8px;border-color:rgba(0,177,204,.05);color:rgba(255,255,255,.4);line-height:18px}.benefit img{display:block;flex:0 0 auto;width:20px;height:20px}.benefit b{line-height:20px;margin-bottom:4px}
     .steps-section{min-height:0}.steps-section .step-card{min-height:358px;overflow:hidden;background:rgba(0,177,204,.01);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}.steps-section .step-image{aspect-ratio:16/9;background-position:center;background-size:cover;border:1px solid rgba(255,255,255,.04)}.steps-section .step-copy{display:flex;flex-direction:column;gap:12px;padding:24px 0 8px}.step-no{display:block;line-height:18px}.steps-section .step-copy h3{display:flex;align-items:center;gap:8px;margin:0;line-height:24px}.steps-section .step-copy h3::before{content:"";display:block;width:4px;height:20px;flex:0 0 4px;background:var(--cyan);border-radius:1px}.step-lines{display:flex;flex-direction:column;gap:4px;margin:0;padding:0 0 0 18px;list-style:disc;color:var(--muted);font-size:12px;line-height:20px}.step-lines li{padding-left:2px}.delivery-card{height:192px;padding:24px 16px}.delivery-head{display:flex;align-items:center;justify-content:space-between;height:24px}.delivery-head .step-no{line-height:20px}.delivery-body{margin-top:24px}.delivery-body h3{margin:0 0 8px;font-size:16px;line-height:24px}.delivery-body p{margin:0;color:var(--muted);font-size:12px;line-height:20px}
     .stack-viewport{margin-top:24px}.footer{font-size:14px;line-height:22px}.footer-contact{display:flex;flex-direction:column;gap:8px;height:74px}.footer p{margin:0}.partners{height:60px;margin-top:48px}.partners b{margin-bottom:16px;line-height:22px}.partner-list{flex-wrap:nowrap;line-height:22px}
-    .feature-track,.steps-track{padding-bottom:0!important;touch-action:pan-x pan-y}.stack-group{padding:11px 8px 7px}.final{border-top:0}.nav{width:min(100%,375px)}
+    .feature-track,.steps-track{padding-bottom:0!important;touch-action:pan-x pan-y}.benefits-viewport,.stack-viewport{overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;touch-action:pan-x}.benefits-viewport::-webkit-scrollbar,.stack-viewport::-webkit-scrollbar{display:none}.benefits,.stack-visual{animation:none!important}.stack-group{padding:11px 8px 7px}.final{border-top:0}.nav{width:min(100%,375px)}
     @media(min-width:376px) and (max-width:767px){.page,.nav,.menu-panel{width:100%;max-width:767px}}
   </style>
 </head>
@@ -115,6 +115,25 @@
     clone.setAttribute('aria-hidden', 'true');
     benefitsTrack.appendChild(clone);
   });
+  const setupScrollableMarquee = (viewport, track, speed) => {
+    let frameId;
+    let resumeTimer;
+    let paused = false;
+    const loopWidth = () => track.scrollWidth / 2;
+    const normalize = () => { const width = loopWidth(); if (width && viewport.scrollLeft >= width) viewport.scrollLeft -= width; else if (viewport.scrollLeft < 0) viewport.scrollLeft += width; };
+    const tick = () => {
+      if (!paused && !reduceMotion) { viewport.scrollLeft += speed; normalize(); }
+      frameId = requestAnimationFrame(tick);
+    };
+    const pause = () => { paused = true; clearTimeout(resumeTimer); };
+    const resume = () => { clearTimeout(resumeTimer); resumeTimer = setTimeout(() => { paused = false; }, 1400); };
+    viewport.addEventListener('scroll', normalize, { passive: true });
+    viewport.addEventListener('pointerenter', pause); viewport.addEventListener('pointerleave', resume);
+    viewport.addEventListener('touchstart', pause, { passive: true }); viewport.addEventListener('touchend', resume, { passive: true });
+    frameId = requestAnimationFrame(tick);
+  };
+  setupScrollableMarquee(document.querySelector('.benefits-viewport'), benefitsTrack, 0.35);
+  setupScrollableMarquee(document.querySelector('.stack-viewport'), document.querySelector('.stack-visual'), 0.28);
   const stepsSection = document.querySelector('.steps-section');
   const originalStep = stepsSection.querySelector('.step-card');
   const stepsTrack = document.createElement('div');
