@@ -90,14 +90,29 @@
     });
     preview.style.backgroundImage = `url('${editableTabs[editableIndex].dataset.preview}')`;
   };
-  const stopEditableAuto = () => clearInterval(editableTimer);
+  let editableElapsed = 0;
+  let editableStartedAt = 0;
+  const EDITABLE_INTERVAL = 3000;
+  const stopEditableAuto = () => {
+    if (editableStartedAt) editableElapsed += performance.now() - editableStartedAt;
+    editableStartedAt = 0;
+    clearTimeout(editableTimer);
+  };
   const startEditableAuto = () => {
     if (reduceMotion) return;
-    stopEditableAuto();
-    editableTimer = setInterval(() => setEditableLayer(editableIndex + 1), 3000);
+    clearTimeout(editableTimer);
+    const remaining = Math.max(0, EDITABLE_INTERVAL - editableElapsed);
+    editableStartedAt = performance.now();
+    editableTimer = setTimeout(() => {
+      setEditableLayer(editableIndex + 1);
+      editableElapsed = 0;
+      editableStartedAt = 0;
+      startEditableAuto();
+    }, remaining);
   };
   editableTabs.forEach((tab, index) => tab.addEventListener('click', () => {
     setEditableLayer(index);
+    editableElapsed = 0;
     startEditableAuto();
   }));
   editableCard.addEventListener('pointerenter', stopEditableAuto);
@@ -161,6 +176,7 @@
     let activeIndex = 0;
     let rafId = 0;
     let startedAt = 0;
+    let elapsed = 0;
     let paused = false;
     let resumeTimer;
     const cards = () => [...track.children];
@@ -178,10 +194,24 @@
       setActive(logical(physicalIndex));
       if (physicalIndex === 0 || physicalIndex === count + 1) setTimeout(() => scrollToPhysical(physicalIndex === 0 ? count : 1, 'auto'), 0);
     };
-    const go = (next) => { setProgress(1); scrollToPhysical(next + 1); setActive(next); };
-    const tick = (now) => { if (paused || reduceMotion) return; const progress = Math.min(1, (now - startedAt) / interval); setProgress(progress); if (progress >= 1) { startedAt = now; go(activeIndex + 1); } rafId = requestAnimationFrame(tick); };
+    const go = (next) => { elapsed = 0; setProgress(1); scrollToPhysical(next + 1); setActive(next); };
+    const tick = (now) => {
+      if (paused || reduceMotion) return;
+      elapsed += now - startedAt;
+      startedAt = now;
+      const progress = Math.min(1, elapsed / interval);
+      setProgress(progress);
+      if (progress >= 1) go(activeIndex + 1);
+      rafId = requestAnimationFrame(tick);
+    };
     const start = () => { if (reduceMotion) return; cancelAnimationFrame(rafId); paused = false; startedAt = performance.now(); rafId = requestAnimationFrame(tick); };
-    const pause = () => { paused = true; cancelAnimationFrame(rafId); clearTimeout(resumeTimer); };
+    const pause = () => {
+      if (!paused && startedAt) elapsed += performance.now() - startedAt;
+      paused = true;
+      startedAt = 0;
+      cancelAnimationFrame(rafId);
+      clearTimeout(resumeTimer);
+    };
     const resume = () => { clearTimeout(resumeTimer); resumeTimer = setTimeout(start, 1200); };
     track.addEventListener('scroll', () => { clearTimeout(track._syncTimer); track._syncTimer = setTimeout(sync, 120); }, { passive: true });
     track.addEventListener('scrollend', sync, { passive: true });
