@@ -37,7 +37,7 @@
     :root{--muted:rgba(255,255,255,.4);--line:rgba(0,177,204,.1)}
     .logo{display:block;width:98px;height:28px}.logo img{display:block;width:100%;height:100%;object-fit:contain;object-position:left center}.nav-button{display:grid;place-items:center;width:121px;height:28px;padding:0;line-height:22px}.menu{padding:2px;cursor:pointer}.menu img{display:block;width:24px;height:24px}.menu-panel{position:fixed;top:60px;left:50%;z-index:4;width:min(100vw,375px);padding:8px 16px 16px;transform:translateX(-50%);background:rgba(14,20,20,.96);border-bottom:1px solid var(--line);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}.menu-panel[hidden]{display:none}.menu-panel a{display:block;padding:10px 0;color:rgba(255,255,255,.7);font-size:12px;line-height:20px}.menu-panel a:hover,.menu-panel a:focus-visible{color:#fff}
     .eyebrow{justify-content:center;width:176px;padding:0;line-height:18px;letter-spacing:0}.eyebrow:after{background:#00ace6}.hero h1{margin-top:24px;line-height:40px;letter-spacing:0}.hero p{line-height:24px}.trust{gap:24px}.trust span{align-items:center}.check-icon{display:block;flex:0 0 auto;width:14px;height:14px}.media{border:0}.media:after{display:none}.cta{width:252px;height:48px;padding:0;line-height:24px}.cta img,.arrow-icon{display:block;width:24px;height:24px}
-    .kicker{line-height:18px;letter-spacing:0}.heading h2{line-height:36px;letter-spacing:0}.heading p{line-height:22px}.feature-card{background:rgba(0,177,204,.01)}.why-section .feature-card{height:auto}.why-section .feature-image{aspect-ratio:16/9;background-size:contain}.feature-copy{padding-top:32px}.feature-copy h3{display:flex;align-items:center;justify-content:space-between;line-height:24px}.feature-copy p{line-height:20px}.why-section .feature-card:first-child .feature-copy p{font-size:11px}.dots i,.dots button{transition:width .2s ease,background-color .2s ease}
+    .kicker{line-height:18px;letter-spacing:0}.heading h2{line-height:36px;letter-spacing:0}.heading p{line-height:22px}.feature-card{background:rgba(0,177,204,.01)}.why-section .feature-card{height:auto}.why-section .feature-image{aspect-ratio:16/9;background-size:contain}.feature-copy{padding-top:32px}.feature-copy h3{display:flex;align-items:center;justify-content:space-between;line-height:24px}.feature-copy p{line-height:20px}.why-section .feature-card:first-child .feature-copy p{font-size:11px}.dots i,.dots button{transition:width .2s ease,background-color .2s ease}.dots button{position:relative;overflow:hidden;cursor:pointer}.dots button::after{content:"";position:absolute;inset:0;transform-origin:left center;transform:scaleX(var(--progress,0));background:#fff;border-radius:inherit}.dots button:not(.active)::after{transform:scaleX(0)}
     .editable>.feature-card{margin-top:24px}.benefits-viewport{height:70px;padding-bottom:0}.benefit{height:70px;min-height:70px;padding:4px 4px 4px 8px;border-color:rgba(0,177,204,.05);color:rgba(255,255,255,.4);line-height:18px}.benefit img{display:block;flex:0 0 auto;width:20px;height:20px}.benefit b{line-height:20px;margin-bottom:4px}
     .steps-section{min-height:0}.steps-section .step-card{min-height:358px;overflow:hidden;background:rgba(0,177,204,.01);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}.steps-section .step-image{aspect-ratio:16/9;background-position:center;background-size:cover;border:1px solid rgba(255,255,255,.04)}.steps-section .step-copy{display:flex;flex-direction:column;gap:12px;padding:24px 0 8px}.step-no{display:block;line-height:18px}.steps-section .step-copy h3{display:flex;align-items:center;gap:8px;margin:0;line-height:24px}.steps-section .step-copy h3::before{content:"";display:block;width:4px;height:20px;flex:0 0 4px;background:var(--cyan);border-radius:1px}.step-lines{display:flex;flex-direction:column;gap:4px;margin:0;padding:0 0 0 18px;list-style:disc;color:var(--muted);font-size:12px;line-height:20px}.step-lines li{padding-left:2px}.delivery-card{height:192px;padding:24px 16px}.delivery-head{display:flex;align-items:center;justify-content:space-between;height:24px}.delivery-head .step-no{line-height:20px}.delivery-body{margin-top:24px}.delivery-body h3{margin:0 0 8px;font-size:16px;line-height:24px}.delivery-body p{margin:0;color:var(--muted);font-size:12px;line-height:20px}
     .stack-viewport{margin-top:24px}.footer{font-size:14px;line-height:22px}.footer-contact{display:flex;flex-direction:column;gap:8px;height:74px}.footer p{margin:0}.partners{height:60px;margin-top:48px}.partners b{margin-bottom:16px;line-height:22px}.partner-list{flex-wrap:nowrap;line-height:22px}
@@ -115,32 +115,6 @@
     clone.setAttribute('aria-hidden', 'true');
     benefitsTrack.appendChild(clone);
   });
-  const whyTrack = document.getElementById('whyTrack');
-  const whyDots = [...document.querySelectorAll('#whyDots button')];
-  let whyAutoIndex = 0;
-  let whyAutoTimer;
-  let whyResumeTimer;
-  const setWhyActive = (index) => { whyDots.forEach((dot, i) => { const isActive = i === index; dot.classList.toggle('active', isActive); dot.setAttribute('aria-current', isActive ? 'true' : 'false'); }); whyAutoIndex = index; };
-  setWhyActive(0);
-  const updateWhyDots = () => {
-    const cards = [...whyTrack.children];
-    const activeIndex = cards.reduce((closest, card, index) =>
-      Math.abs((card.offsetLeft - whyTrack.offsetLeft) - whyTrack.scrollLeft) < Math.abs((cards[closest].offsetLeft - whyTrack.offsetLeft) - whyTrack.scrollLeft) ? index : closest, 0);
-    whyDots.forEach((dot, index) => dot.classList.toggle('active', index === activeIndex));
-    setWhyActive(activeIndex);
-  };
-  whyTrack.addEventListener('scrollend', updateWhyDots, { passive: true });
-  let whyScrollFallback;
-  whyTrack.addEventListener('scroll', () => { clearTimeout(whyScrollFallback); whyScrollFallback = setTimeout(updateWhyDots, 450); }, { passive: true });
-  const goToWhy = (index) => { const card = whyTrack.children[index]; setWhyActive(index); whyTrack.scrollTo({ left: card.offsetLeft - whyTrack.offsetLeft, behavior: 'smooth' }); };
-  whyDots.forEach((dot, index) => dot.addEventListener('click', () => goToWhy(index)));
-  const advanceWhy = () => goToWhy((whyAutoIndex + 1) % whyTrack.children.length);
-  const startWhyAuto = () => { clearInterval(whyAutoTimer); whyAutoTimer = setInterval(advanceWhy, 4000); };
-  const pauseWhyAuto = () => { clearInterval(whyAutoTimer); clearTimeout(whyResumeTimer); };
-  const resumeWhyAuto = () => { clearTimeout(whyResumeTimer); whyResumeTimer = setTimeout(startWhyAuto, 2500); };
-  whyTrack.addEventListener('pointerenter', pauseWhyAuto); whyTrack.addEventListener('pointerleave', startWhyAuto);
-  whyTrack.addEventListener('touchstart', pauseWhyAuto, { passive: true }); whyTrack.addEventListener('touchend', resumeWhyAuto, { passive: true });
-  if (!reduceMotion) startWhyAuto();
   const stepsSection = document.querySelector('.steps-section');
   const originalStep = stepsSection.querySelector('.step-card');
   const stepsTrack = document.createElement('div');
@@ -154,13 +128,50 @@
   originalStep.replaceWith(stepsTrack);
   const stepDots = stepsSection.querySelector('.dots');
   stepDots.innerHTML = stepData.map((_,i) => `<button aria-label="Step ${i+1}" class="${i===0?'active':''}"></button>`).join('');
-  const updateStepDots = () => { const cards=[...stepsTrack.children]; const index=cards.reduce((best,card,i)=>Math.abs(card.offsetLeft-stepsTrack.scrollLeft)<Math.abs(cards[best].offsetLeft-stepsTrack.scrollLeft)?i:best,0); stepDots.querySelectorAll('button').forEach((dot,i)=>dot.classList.toggle('active',i===index)); };
-  stepsTrack.addEventListener('scroll', updateStepDots, { passive:true });
-  stepDots.querySelectorAll('button').forEach((dot,i)=>dot.addEventListener('click',()=>{ const card=stepsTrack.children[i]; stepsTrack.scrollTo({left:card.offsetLeft-stepsTrack.offsetLeft,behavior:'smooth'}); }));
-  const addAutoCarousel = (track, dots, instantForwardWrap = false) => { let index = 0; let timer; const setActive = (next) => { index = (next + track.children.length) % track.children.length; dots.querySelectorAll('button').forEach((dot,i)=>{ const isActive=i===index; dot.classList.toggle('active',isActive); dot.setAttribute('aria-current',isActive?'true':'false'); }); }; const go = (next, isAutomatic = false) => { const wrapsForward = isAutomatic && instantForwardWrap && index === track.children.length - 1 && next >= track.children.length; setActive(next); const card = track.children[index]; track.scrollTo({left:card.offsetLeft-track.offsetLeft,behavior:reduceMotion||wrapsForward?'auto':'smooth'}); }; const sync = () => { const cards=[...track.children]; index=cards.reduce((best,card,n)=>Math.abs((card.offsetLeft-track.offsetLeft)-track.scrollLeft)<Math.abs((cards[best].offsetLeft-track.offsetLeft)-track.scrollLeft)?n:best,0); setActive(index); }; const start = () => { if (reduceMotion) return; clearInterval(timer); timer = setInterval(() => go(index + 1, true), 4000); }; track.addEventListener('scrollend', sync); let fallback; track.addEventListener('scroll',()=>{clearTimeout(fallback);fallback=setTimeout(sync,450)},{passive:true}); dots.querySelectorAll('button').forEach((dot,i)=>dot.addEventListener('click',()=>go(i))); track.addEventListener('pointerenter',()=>clearInterval(timer)); track.addEventListener('pointerleave',start); setActive(0); start(); };
-  addAutoCarousel(stepsTrack, stepDots, true);
+  const addCarousel = (track, dots, interval = 4000) => {
+    const originals = [...track.children];
+    const count = originals.length;
+    if (count < 2) return;
+    track.insertBefore(originals[count - 1].cloneNode(true), originals[0]);
+    track.appendChild(originals[0].cloneNode(true));
+    let physicalIndex = 1;
+    let activeIndex = 0;
+    let rafId = 0;
+    let startedAt = 0;
+    let paused = false;
+    let resumeTimer;
+    const cards = () => [...track.children];
+    const logical = (index) => (index - 1 + count) % count;
+    const setProgress = (value) => dots.querySelectorAll('button').forEach((dot, i) => dot.style.setProperty('--progress', i === activeIndex ? String(value) : '0'));
+    const setActive = (index, progress = 0) => {
+      activeIndex = (index + count) % count;
+      dots.querySelectorAll('button').forEach((dot, i) => { const selected = i === activeIndex; dot.classList.toggle('active', selected); dot.setAttribute('aria-current', selected ? 'true' : 'false'); });
+      setProgress(progress);
+    };
+    const scrollToPhysical = (index, behavior = 'smooth') => { physicalIndex = index; const card = track.children[index]; track.scrollTo({ left: card.offsetLeft - track.offsetLeft, behavior: reduceMotion ? 'auto' : behavior }); };
+    const sync = () => {
+      const list = cards();
+      physicalIndex = list.reduce((best, card, i) => Math.abs((card.offsetLeft - track.offsetLeft) - track.scrollLeft) < Math.abs((list[best].offsetLeft - track.offsetLeft) - track.scrollLeft) ? i : best, 0);
+      setActive(logical(physicalIndex));
+      if (physicalIndex === 0 || physicalIndex === count + 1) setTimeout(() => scrollToPhysical(physicalIndex === 0 ? count : 1, 'auto'), 0);
+    };
+    const go = (next) => { setProgress(1); scrollToPhysical(next + 1); setActive(next); };
+    const tick = (now) => { if (paused || reduceMotion) return; const progress = Math.min(1, (now - startedAt) / interval); setProgress(progress); if (progress >= 1) { startedAt = now; go(activeIndex + 1); } rafId = requestAnimationFrame(tick); };
+    const start = () => { if (reduceMotion) return; cancelAnimationFrame(rafId); paused = false; startedAt = performance.now(); rafId = requestAnimationFrame(tick); };
+    const pause = () => { paused = true; cancelAnimationFrame(rafId); clearTimeout(resumeTimer); };
+    const resume = () => { clearTimeout(resumeTimer); resumeTimer = setTimeout(start, 1200); };
+    track.addEventListener('scroll', () => { clearTimeout(track._syncTimer); track._syncTimer = setTimeout(sync, 120); }, { passive: true });
+    track.addEventListener('scrollend', sync, { passive: true });
+    dots.querySelectorAll('button').forEach((dot, i) => dot.addEventListener('click', () => { pause(); go(i); resume(); }));
+    track.addEventListener('pointerenter', pause); track.addEventListener('pointerleave', resume);
+    track.addEventListener('touchstart', pause, { passive: true }); track.addEventListener('touchend', resume, { passive: true });
+    requestAnimationFrame(() => scrollToPhysical(1, 'auto'));
+    setActive(0); start();
+  };
+  addCarousel(document.getElementById('whyTrack'), document.getElementById('whyDots'));
+  addCarousel(stepsTrack, stepDots);
   const deliverySection = document.querySelector('.delivery-section');
-  if (deliverySection) { const sourceCard = deliverySection.querySelector('.step-card'); const track = document.createElement('div'); track.className = 'steps-track delivery-track'; const data = [['01 / SELECT','Select an area','Choose a location and draw the exact area you want to model.'],['02 / GENERATE','Generate from satellite imagery','Build terrain, buildings, roads and vegetation from your selected area.'],['03 / REFINE','Refine the model','Edit objects layer by layer and adjust the model before export.'],['04 / DELIVER','Export and move on','Continue in BIM, GIS, Blender or a game engine.']]; track.innerHTML=data.map(([no,title,copy])=>`<article class="step-card delivery-card"><div class="delivery-head"><span class="step-no">${no}</span><img class="arrow-icon" src="assets/arrow-up-right.svg" alt=""></div><div class="delivery-body"><h3>${title}</h3><p>${copy}</p></div></article>`).join(''); sourceCard.replaceWith(track); const dots=deliverySection.querySelector('.dots'); dots.innerHTML=data.map((_,i)=>`<button type="button" aria-label="Delivery step ${i+1}" class="${i?'':'active'}"></button>`).join(''); addAutoCarousel(track,dots,true); }
+  if (deliverySection) { const sourceCard = deliverySection.querySelector('.step-card'); const track = document.createElement('div'); track.className = 'steps-track delivery-track'; const data = [['01 / SELECT','Select an area','Choose a location and draw the exact area you want to model.'],['02 / GENERATE','Generate from satellite imagery','Build terrain, buildings, roads and vegetation from your selected area.'],['03 / REFINE','Refine the model','Edit objects layer by layer and adjust the model before export.'],['04 / DELIVER','Export and move on','Continue in BIM, GIS, Blender or a game engine.']]; track.innerHTML=data.map(([no,title,copy])=>`<article class="step-card delivery-card"><div class="delivery-head"><span class="step-no">${no}</span><img class="arrow-icon" src="assets/arrow-up-right.svg" alt=""></div><div class="delivery-body"><h3>${title}</h3><p>${copy}</p></div></article>`).join(''); sourceCard.replaceWith(track); const dots=deliverySection.querySelector('.dots'); dots.innerHTML=data.map((_,i)=>`<button type="button" aria-label="Delivery step ${i+1}" class="${i?'':'active'}"></button>`).join(''); addCarousel(track,dots); }
 </script><script>
   const stackIcons = {
     '△': 'assets/unreal.png',
